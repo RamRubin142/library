@@ -53,4 +53,11 @@ export class UsersController {
   ): Promise<User | null> {
     return this.UsersService.deleteBook(userId, editBooksDto.bookId);
   }
+  @Patch('/books/:id')
+  async favoriteBook(
+    @Param('id') userId: string,
+    @Body('bookId') bookId: string,
+  ): Promise<User | null> {
+    return this.UsersService.favoriteBook(userId, bookId);
+  }
 }

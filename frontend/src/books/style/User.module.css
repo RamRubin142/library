@@ -1,0 +1,82 @@
+.userContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid blue;
+  border-radius: 10px;
+  margin-bottom: 10px;
+ 
+}
+
+
+
+.name {
+  display: flex;
+  margin-right: 6px;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  border: none;
+  margin-left: 7px;
+}
+
+.deleteButton {
+  display: flex;
+  flex-direction: column;
+  background-image: url("https://cdn-icons-png.freepik.com/512/19027/19027695.png");
+  background-repeat: no-repeat;
+  background-position: 50% 25%;
+  background-size: 20px;
+  font-size: 10px;
+  justify-content: end;
+  background-color: white;
+  height: 45px;
+  border: none;
+}
+
+.deleteButton:hover {
+  background-size: 25px;
+  border-color: transparent;
+}
+.deleteButton:focus {
+  outline: none;
+}
+.editButton:focus {
+  outline: none;
+}
+
+.editButton {
+  display: flex;
+  flex-direction: column;
+  background-image: url("https://cdn-icons-png.freepik.com/512/16065/16065457.png");
+  background-repeat: no-repeat;
+  background-position: 50% 25%;
+  background-size: 20px;
+  font-size: 10px;
+  justify-content: end;
+  background-color: white;
+  height: 45px;
+  border: none;
+}
+
+.editButton:hover {
+  background-size: 25px;
+  border-color: transparent;
+}
+
+.editBox {
+  font-size: 16px;
+}
+
+
+.text {
+  white-space: pre-wrap;
+
+}
