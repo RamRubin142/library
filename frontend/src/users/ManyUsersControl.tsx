@@ -45,7 +45,7 @@ export const ManyUsersControl = () => {
   });
 
   return (
-    <Box sx={{ border: 1, height: "100vh", padding: "20px", flexGrow: 2 }}>
+    <Box sx={{ border: 1, height: "100vh", padding: "20px", width : "50%" }}>
       {users.map((user) => (
         <User
           key={user._id}

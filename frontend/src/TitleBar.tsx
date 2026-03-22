@@ -1,19 +1,38 @@
-import {
-  AppBar,
-  Avatar,
-  Badge,
-  Box,
-  InputBase,
-  Menu,
-  MenuItem,
-  styled,
-  Toolbar,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, Toolbar, Typography, Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import type { RootState } from "./redux/store";
+import { useQuery } from "@tanstack/react-query";
 export const TitleBar = () => {
+  const currentUserId = useSelector(
+    (state: RootState) => state.currentUser.loggedInUserId
+  );
+  interface BookInterface {
+    _id: string;
+    name: string;
+  }
+  interface UserInterface {
+    _id: string;
+    name: string;
+
+    favorite: string;
+  }
+  const { data: user } = useQuery<UserInterface>({
+    queryKey: ["user", currentUserId],
+    queryFn: () =>
+      fetch("http://localhost:4000/users/" + currentUserId).then((res) =>
+        res.json()
+      ),
+  });
+  const { data: favBook } = useQuery<BookInterface>({
+    queryKey: ["favBook", user?.favorite],
+    queryFn: () =>
+      fetch("http://localhost:4000/books/" + user?.favorite).then((res) =>
+        res.json()
+      ),
+  });
+
   return (
-    <Box sx={{border : 1}}>
+    <Box sx={{ border: 1 }}>
       <Toolbar sx={{ bgcolor: "white" }}>
         <Typography
           color="black"
@@ -23,14 +42,14 @@ export const TitleBar = () => {
         >
           הספריה
         </Typography>
-        <Box sx={{ flexDirection: "column", flexGrow:1}}>
-          <Typography color="black">שלום עידן דוידי!</Typography>
+        <Box sx={{ flexDirection: "column", flexGrow: 1 }}>
+          <Typography color="black">שלום {user?.name}!</Typography>
           <Typography variant="caption" color="black">
-            הספר האהוב עליך הוא כדכ'ק
+            הספר האהוב עליך הוא {favBook?.name}
           </Typography>
         </Box>
         <Button sx={{ bgcolor: "green", color: "white" }}>התנתק</Button>
       </Toolbar>
-    </Box >
+    </Box>
   );
 };
