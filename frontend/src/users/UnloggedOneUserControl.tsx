@@ -11,7 +11,7 @@ export const UnloggedOneUserControl = () => {
   interface BookInterface {
     _id: string;
     name: string;
-    author: string;
+    author: {name : string};
   }
   interface UserInterface {
     _id: string;
@@ -31,13 +31,22 @@ export const UnloggedOneUserControl = () => {
   if (!user || !selectedUserId || Array.isArray(user)) {
     return (
       <Box
-        sx={{ border: 1, height: "100vh", padding: "20px", width: "50%" }}
+        sx={{ border: 1, height: "80vh", padding: "20px", width: "50%" }}
       ></Box>
     );
   }
 
+
   return (
-    <Box sx={{ border: 1, height: "100vh", padding: "20px", width: "50%" }}>
+    <Box
+      sx={{
+        border: 1,
+        height: "80vh",
+        padding: "20px",
+        width: "50%",
+        overflowY: "scroll",
+      }}
+    >
       <div className={styles.topBar}>
         <div>
           הספרים שקרא <b>{user.name}</b> :
@@ -49,7 +58,7 @@ export const UnloggedOneUserControl = () => {
             key={book._id}
             id={book._id}
             name={book.name}
-            author={book.author}
+            author={book.author.name}
           />
         ))}
       </div>

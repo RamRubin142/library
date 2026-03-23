@@ -27,12 +27,20 @@ export const OneAuthorControl = () => {
   if (!author || !selectedAuthorId || Array.isArray(author)) {
     return (
       <Box
-        sx={{ border: 1, height: "100vh", padding: "20px", width:"50%" }}
+        sx={{ border: 1, height: "80vh", padding: "20px", width:"50%" }}
       ></Box>
     );
   } else {
     return (
-      <Box sx={{ border: 1, height: "100vh", padding: "20px", width:"50%" }}>
+      <Box
+        sx={{
+          border: 1,
+          height: "80vh",
+          padding: "20px",
+          width: "50%",
+          overflowY: "scroll",
+        }}
+      >
         <div className={styles.topBar}>
           <div>
             הספרים של <b>{author.name}</b> :

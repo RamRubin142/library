@@ -101,13 +101,13 @@ export const OneUserControl = () => {
   if (!user || !selectedUserId || Array.isArray(user)) {
     return (
       <Box
-        sx={{ border: 1, height: "100vh", padding: "20px", width: "50%" }}
+        sx={{ border: 1, height: "80vh", padding: "20px", width: "50%" }}
       ></Box>
     );
   }
 
   return (
-    <Box sx={{ border: 1, height: "100vh", padding: "20px", width: "50%" }}>
+    <Box sx={{ border: 1, height: "80vh", padding: "20px", width: "50%", overflowY : "scroll" }}>
       <div className={styles.topBar}>
         <div>
           הספרים שקרא <b>{user.name}</b> :

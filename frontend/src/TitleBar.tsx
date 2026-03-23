@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { logUserIn } from "./redux/loggedSlice";
 import { useDispatch } from "react-redux";
 export const TitleBar = () => {
+
   const dispatch = useDispatch();
   const currentUserId = useSelector(
     (state: RootState) => state.currentUser.loggedInUserId
@@ -35,7 +36,7 @@ export const TitleBar = () => {
   });
 
   return (
-    <Box sx={{ border: 1 }}>
+    <Box sx={{ border: 1,  }}>
       <Toolbar sx={{ bgcolor: "white" }}>
         <Typography
           color="black"

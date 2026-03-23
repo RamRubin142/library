@@ -21,7 +21,7 @@ export const NavSideBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{ border: 1, height: "100vh" }}>
+    <Box sx={{ border: 1, height: "86vh" }}>
       <ButtonGroup orientation="vertical" aria-label="Vertical button group">
         <Button
           sx={selectedSection == "USERS" ? selectedButtonStyle : buttonStyle}

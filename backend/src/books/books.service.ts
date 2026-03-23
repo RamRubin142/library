@@ -52,19 +52,21 @@ export class BooksService {
     return this.booksRepository.findOneAndAddReader(id, userId);
   }
 
-  async deleteBook(id: string) {
+  async deleteBook(id: string) { 
     const book = await this.booksRepository.findOne(id);
+
     if (book) {
       const readers = book.readers;
-      readers.forEach((user) => {
-        this.usersService.deleteBook((user as any)._id.toString(), id);
-        if((user as any).favorite.toString() == id) {
-          this.usersService.favoriteBook((user as any)._id.toString(), "");
+      readers.forEach(async (user) => {
+        await this.usersService.deleteBook((user as any)?._id?.toString(), id);
+
+        if((user as any)?.favorite?.toString() == id) {
+           await this.usersService.favoriteBook((user as any)?._id?.toString(), "");
         }
       });
       const author = book.author;
-      this.authorsService.deleteBook((author as any)._id.toString(), id);
+      await this.authorsService.deleteBook((author as any)?._id?.toString(), id);
     }
-    return this.booksRepository.delete(id);
+    return await this.booksRepository.delete(id);
   }
 }

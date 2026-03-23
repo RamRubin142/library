@@ -3,12 +3,21 @@ import { User } from "./User";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { selectUser } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
+import { logUserIn } from "../redux/loggedSlice";
 export const ManyUsersControl = () => {
   const dispatch = useDispatch();
   interface UserInterface {
     _id: string;
     name: string;
   }
+  const selectedUserId = useSelector(
+    (state: RootState) => state.user.selectedUserId
+  );
+  const loggedUserId = useSelector(
+    (state: RootState) => state.currentUser.loggedInUserId
+  );
 
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],
@@ -24,8 +33,14 @@ export const ManyUsersControl = () => {
         method: "DELETE",
       });
     },
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
+      if (selectedUserId === variables.userId) {
+        dispatch(selectUser(""));
+      }
+      if(variables.userId == loggedUserId) {
+        dispatch(logUserIn(""));
+      }
     },
   });
 
@@ -41,11 +56,20 @@ export const ManyUsersControl = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 
   return (
-    <Box sx={{ border: 1, height: "100vh", padding: "20px", width : "50%" }}>
+    <Box
+      sx={{
+        border: 1,
+        height: "80vh",
+        padding: "20px",
+        width: "50%",
+        overflowY: "scroll",
+      }}
+    >
       {users.map((user) => (
         <User
           key={user._id}

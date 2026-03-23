@@ -3,12 +3,21 @@ import { Author } from "./Author";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { selectAuthor } from "../redux/authorSlice";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
+import { selectBook } from "../redux/bookSlice";
 export const ManyAuthorsControl = () => {
   const dispatch = useDispatch();
   interface AuthorInterface {
     _id: string;
     name: string;
+
   }
+
+  const selectedAuthorId = useSelector(
+    (state: RootState) => state.author.selectedAuthorId
+  );
+
 
   const { data: authors = [] } = useQuery<AuthorInterface[]>({
     queryKey: ["authors"],
@@ -24,8 +33,18 @@ export const ManyAuthorsControl = () => {
         method: "DELETE",
       });
     },
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
+      dispatch(selectBook(""));
+      queryClient.invalidateQueries({ queryKey: ["favBook"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["book"] });
       queryClient.invalidateQueries({ queryKey: ["authors"] });
+      queryClient.invalidateQueries({
+        queryKey: ["author", variables.authorId],
+      });
+      if (selectedAuthorId === variables.authorId) {
+        dispatch(selectAuthor(""));
+      }
     },
   });
 
@@ -39,13 +58,24 @@ export const ManyAuthorsControl = () => {
         body: JSON.stringify({ name: variables.newName }),
       });
     },
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["authors"] });
+      queryClient.invalidateQueries({
+        queryKey: ["author", variables.authorId],
+      });
     },
   });
 
   return (
-    <Box sx={{ border: 1, height: "100vh", padding: "20px", width:"50%" }}>
+    <Box
+      sx={{
+        border: 1,
+        height: "80vh",
+        padding: "20px",
+        width: "50%",
+        overflowY: "scroll",
+      }}
+    >
       {authors.map((author) => (
         <Author
           key={author._id}

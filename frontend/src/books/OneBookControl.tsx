@@ -40,19 +40,21 @@ export const OneBookControl = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["book"] });
+      queryClient.invalidateQueries({ queryKey: ["favBook"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 
   if (!book || !selectedBookId || Array.isArray(book)) {
     return (
       <Box
-        sx={{ border: 1, height: "100vh", padding: "20px", width: "50%" }}
+        sx={{ border: 1, height: "80vh", padding: "20px", width: "50%" }}
       ></Box>
     );
   }
 
   return (
-    <Box sx={{ border: 1, height: "100vh", padding: "20px", width: "50%" }}>
+    <Box sx={{ border: 1, height: "80vh", padding: "20px", width: "50%", overflowY : "scroll" }}>
       <div className={styles.topBar}>
         <div>
           הקוראים של <b>{book.name}</b> :
