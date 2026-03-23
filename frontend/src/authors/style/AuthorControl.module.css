@@ -1,4 +1,5 @@
 .author {
-    display: flex;
-    justify-content: row;
+  display: flex;
+  justify-content: row;
+  font-family: Arial, sans-serif;
 }

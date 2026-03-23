@@ -16,6 +16,7 @@ const rtlCache = createCache({
 
 const theme = createTheme({
   direction: "rtl",
+
 });
 
 document.body.dir = "rtl";

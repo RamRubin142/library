@@ -8,7 +8,15 @@ export class UsersRepository {
   constructor(@InjectModel(User.name) private UserModel: Model<UserDocument>) {}
 
   async findOne(_id: string): Promise<User | null> {
-    return this.UserModel.findOne({ _id }).populate('books').exec();
+    return this.UserModel.findOne({ _id })
+      .populate({
+        path: 'books', 
+        populate: {
+          path: 'author', 
+          select: 'name', 
+        },
+      })
+      .exec();
   }
 
   async find(): Promise<User[] | null> {
@@ -60,21 +68,20 @@ export class UsersRepository {
     _id: string,
     bookId: string,
   ): Promise<User | null> {
-    if(bookId != "") {
-        return this.UserModel.findOneAndUpdate(
-          { _id },
-          {
-            favorite: bookId,
-          },
-        ).exec();
+    if (bookId != '') {
+      return this.UserModel.findOneAndUpdate(
+        { _id },
+        {
+          favorite: bookId,
+        },
+      ).exec();
     } else {
-        return this.UserModel.findOneAndUpdate(
-          { _id },
-          {
-            favorite: null,
-          },
-        ).exec();
+      return this.UserModel.findOneAndUpdate(
+        { _id },
+        {
+          favorite: null,
+        },
+      ).exec();
     }
-
   }
 }

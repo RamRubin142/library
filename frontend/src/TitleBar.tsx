@@ -2,7 +2,10 @@ import { Box, Toolbar, Typography, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import type { RootState } from "./redux/store";
 import { useQuery } from "@tanstack/react-query";
+import { logUserIn } from "./redux/loggedSlice";
+import { useDispatch } from "react-redux";
 export const TitleBar = () => {
+  const dispatch = useDispatch();
   const currentUserId = useSelector(
     (state: RootState) => state.currentUser.loggedInUserId
   );
@@ -48,7 +51,7 @@ export const TitleBar = () => {
             הספר האהוב עליך הוא {favBook?.name}
           </Typography>
         </Box>
-        <Button sx={{ bgcolor: "green", color: "white" }}>התנתק</Button>
+        <Button sx={{ bgcolor: "green", color: "white" }} onClick={()=>{dispatch(logUserIn(""))}}>התנתק</Button>
       </Toolbar>
     </Box>
   );

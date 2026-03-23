@@ -19,3 +19,8 @@
 
     width :90%;
 }
+
+.addBookComponent:hover {
+    background-color: blue;
+    color : white;
+}
