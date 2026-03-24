@@ -52,7 +52,7 @@ export const TitleBar = () => {
             הספר האהוב עליך הוא {favBook?.name}
           </Typography>
         </Box>
-        <Button sx={{ bgcolor: "green", color: "white" }} onClick={()=>{dispatch(logUserIn(""))}}>התנתק</Button>
+        <Button sx={{ bgcolor: "green", color: "white", width : "100px", borderRadius : "0", fontSize : "13pt" }} onClick={()=>{dispatch(logUserIn(""))}}>התנתק</Button>
       </Toolbar>
     </Box>
   );

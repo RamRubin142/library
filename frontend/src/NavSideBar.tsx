@@ -7,11 +7,13 @@ import { useDispatch } from "react-redux";
 const buttonStyle = {
   backgroundColor: "white",
   color: "black",
+  borderRadius: 0,
 };
 
 const selectedButtonStyle = {
   backgroundColor: "blue",
   color: "white",
+  borderRadius : 0,
 };
 
 export const NavSideBar = () => {
@@ -21,7 +23,7 @@ export const NavSideBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{ border: 1, height: "86vh" }}>
+    <Box sx={{ border: 1, height: "85.6vh" }}>
       <ButtonGroup orientation="vertical" aria-label="Vertical button group">
         <Button
           sx={selectedSection == "USERS" ? selectedButtonStyle : buttonStyle}
