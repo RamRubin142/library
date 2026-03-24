@@ -1,9 +1,11 @@
 import { Box } from "@mui/material";
 import styles from "./style/User.module.css";
-import { useState } from "react";
 import type { KeyboardEvent, ChangeEvent } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { UserSlice } from "../redux/userSlice";
+
 type userProps = {
   name: string;
   id: string;
@@ -13,8 +15,13 @@ type userProps = {
 };
 
 export const User = (props: userProps) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState(props.name);
+  const dispatch = useDispatch();
+  const currentlyEditedUser = useSelector(
+    (state: RootState) => state.user.editedUserId
+  );
+  const currentlyEditedUserText = useSelector(
+    (state: RootState) => state.user.editedUserText
+  );
   const selectedUserId = useSelector(
     (state: RootState) => state.user.selectedUserId
   );
@@ -24,9 +31,14 @@ export const User = (props: userProps) => {
   };
 
   const editTaskHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && name.trim() !== "") {
-      props.onUpdate(props.id, name);
-      setIsEditing(false);
+    if (event.key === "Enter" && currentlyEditedUserText.trim() !== "") {
+      props.onUpdate(props.id, currentlyEditedUserText);
+      dispatch(
+        UserSlice.actions.setUserIsEdited({
+          userId: "",
+          userText: "",
+        })
+      );
     }
   };
 
@@ -42,25 +54,37 @@ export const User = (props: userProps) => {
       <div className={styles.name}>
         <div className={styles.text}>{` מזהה : ${props.id}   `}</div>
         <div>
-          {isEditing ? (
+          {props.id == currentlyEditedUser ? (
             <input
               className={styles.editBox}
               type="text"
-              value={name}
+              value={currentlyEditedUserText}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setName(e.target.value)
+                dispatch(
+                  UserSlice.actions.setUserIsEdited({
+                    userText: e.target.value,
+                    userId: props.id,
+                  })
+                )
               }
               onKeyDown={editTaskHandler}
             />
           ) : (
-            <p>שם : {name}</p>
+            <p>שם : {props.name}</p>
           )}
         </div>
       </div>
       <div className={styles.buttons}>
         <button
           className={styles.editButton}
-          onClick={() => setIsEditing(true)}
+          onClick={() =>
+            dispatch(
+              UserSlice.actions.setUserIsEdited({
+                userId: props.id,
+                userText: props.name,
+              })
+            )
+          }
         >
           ערוך
         </button>

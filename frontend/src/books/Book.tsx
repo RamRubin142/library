@@ -1,9 +1,11 @@
 import { Box } from "@mui/material";
 import styles from "./style/Book.module.css";
-import { useState } from "react";
 import type { KeyboardEvent, ChangeEvent } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { BookSlice } from "../redux/bookSlice";
+
 type bookProps = {
   name: string;
   id: string;
@@ -14,8 +16,14 @@ type bookProps = {
 };
 
 export const Book = (props: bookProps) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState(props.name);
+  const dispatch = useDispatch();
+  const currentlyEditedBook = useSelector(
+    (state: RootState) => state.book.editedBookId
+  );
+  const currentlyEditedBookText = useSelector(
+    (state: RootState) => state.book.editedBookText
+  );
+
   const selectedBookId = useSelector(
     (state: RootState) => state.book.selectedBookId
   );
@@ -25,12 +33,16 @@ export const Book = (props: bookProps) => {
   };
 
   const editTaskHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && name.trim() !== "") {
-      props.onUpdate(props.id, name);
-      setIsEditing(false);
+    if (event.key === "Enter" && currentlyEditedBookText.trim() !== "") {
+      props.onUpdate(props.id, currentlyEditedBookText);
+      dispatch(
+        BookSlice.actions.setBookIsEdited({
+          bookId: "",
+          bookText: "",
+        })
+      );
     }
   };
-  console.log(props);
 
   return (
     <Box
@@ -45,18 +57,23 @@ export const Book = (props: bookProps) => {
         <div className={styles.name}>
           <div className={styles.topText}>{`מזהה : ${props.id}   שם : `}</div>
           <div>
-            {isEditing ? (
+            {props.id == currentlyEditedBook ? (
               <input
                 className={styles.editBox}
                 type="text"
-                value={name}
+                value={currentlyEditedBookText}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setName(e.target.value)
+                  dispatch(
+                    BookSlice.actions.setBookIsEdited({
+                      bookText: e.target.value,
+                      bookId: props.id,
+                    })
+                  )
                 }
                 onKeyDown={editTaskHandler}
               />
             ) : (
-              <p className={styles.bottomText}>{name}</p>
+              <p className={styles.bottomText}>{props.name}</p>
             )}
           </div>
         </div>
@@ -65,7 +82,14 @@ export const Book = (props: bookProps) => {
       <div className={styles.buttons}>
         <button
           className={styles.editButton}
-          onClick={() => setIsEditing(true)}
+          onClick={() =>
+            dispatch(
+              BookSlice.actions.setBookIsEdited({
+                bookId: props.id,
+                bookText: props.name,
+              })
+            )
+          }
         >
           ערוך
         </button>

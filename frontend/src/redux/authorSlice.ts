@@ -1,11 +1,15 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthorState {
-  selectedAuthorId : string | null;
+  selectedAuthorId: string | null;
+  editedAuthorId: string;
+  editedAuthorText: string;
 }
 
 const initialState: AuthorState = {
-  selectedAuthorId : "",
+  selectedAuthorId: "",
+  editedAuthorId: "",
+  editedAuthorText: "",
 };
 
 export const authorSlice = createSlice({
@@ -14,6 +18,13 @@ export const authorSlice = createSlice({
   reducers: {
     selectAuthor: (state, action: PayloadAction<string>) => {
       state.selectedAuthorId = action.payload;
+    },
+    setAuthorIsEdited: (
+      state,
+      action: PayloadAction<{ authorId: string; authorText: string }>
+    ) => {
+      state.editedAuthorId = action.payload.authorId;
+      state.editedAuthorText = action.payload.authorText;
     },
   },
 });
