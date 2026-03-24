@@ -4,8 +4,10 @@ import type { RootState } from "./redux/store";
 import { useQuery } from "@tanstack/react-query";
 import { logUserIn } from "./redux/loggedSlice";
 import { useDispatch } from "react-redux";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
 export const TitleBar = () => {
-
   const dispatch = useDispatch();
   const currentUserId = useSelector(
     (state: RootState) => state.currentUser.loggedInUserId
@@ -20,6 +22,7 @@ export const TitleBar = () => {
 
     favorite: string;
   }
+  const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
   const { data: user } = useQuery<UserInterface>({
     queryKey: ["user", currentUserId],
     queryFn: () =>
@@ -36,7 +39,7 @@ export const TitleBar = () => {
   });
 
   return (
-    <Box sx={{ border: 1,  }}>
+    <Box sx={{ border: 1 }}>
       <Toolbar sx={{ bgcolor: "white" }}>
         <Typography
           color="black"
@@ -52,7 +55,40 @@ export const TitleBar = () => {
             הספר האהוב עליך הוא {favBook?.name}
           </Typography>
         </Box>
-        <Button sx={{ bgcolor: "green", color: "white", width : "100px", borderRadius : "0", fontSize : "13pt" }} onClick={()=>{dispatch(logUserIn(""))}}>התנתק</Button>
+        <Button
+          sx={{
+            bgcolor: "orange",
+            color: "white",
+            width: "100px",
+            borderRadius: "0",
+            fontSize: "13pt",
+          }}
+          onClick={() => {
+            setLogoutPopupOpen(true);
+          }}
+        >
+          התנתק
+        </Button>
+        <Dialog open={logoutPopupOpen}>
+          <DialogTitle>האם אתה בטוח שברצונך להתנתק ?</DialogTitle>
+          <Box>
+            <Button
+              onClick={() => {
+                dispatch(logUserIn(""));
+                setLogoutPopupOpen(false);
+              }}
+            >
+              כן
+            </Button>
+            <Button
+              onClick={() => {
+                setLogoutPopupOpen(false);
+              }}
+            >
+              לא
+            </Button>
+          </Box>
+        </Dialog>
       </Toolbar>
     </Box>
   );
