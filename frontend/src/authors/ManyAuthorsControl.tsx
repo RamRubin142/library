@@ -6,13 +6,10 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { selectBook } from "../redux/bookSlice";
+import { type AuthorInterface } from "../models/authors/AuthorInterface";
 export const ManyAuthorsControl = () => {
   const dispatch = useDispatch();
-  interface AuthorInterface {
-    _id: string;
-    name: string;
-
-  }
+  
 
   const selectedAuthorId = useSelector(
     (state: RootState) => state.author.selectedAuthorId
@@ -80,6 +77,7 @@ export const ManyAuthorsControl = () => {
         <Author
           key={author._id}
           id={author._id}
+          serialId={author.serialId}
           name={author.name}
           onDelete={(id: string) => {
             deleteMutation.mutate({ authorId: id });

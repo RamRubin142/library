@@ -1,9 +1,6 @@
 import Button from "@mui/material/Button";
 import { Box, ButtonGroup } from "@mui/material";
-import { useSelector } from "react-redux";
-import type { RootState } from "./redux/store";
-import { selectSection } from "./redux/pageSlice";
-import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 const buttonStyle = {
   backgroundColor: "white",
   color: "black",
@@ -17,34 +14,44 @@ const selectedButtonStyle = {
 };
 
 export const NavSideBar = () => {
-  const selectedSection = useSelector(
-    (state: RootState) => state.page.selectedSection
-  );
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let location = useLocation();
 
   return (
     <Box sx={{ border: 1, height: "85.6vh" }}>
       <ButtonGroup orientation="vertical" aria-label="Vertical button group">
         <Button
-          sx={selectedSection == "USERS" ? selectedButtonStyle : buttonStyle}
+          sx={
+            location.pathname == "/home/users"
+              ? selectedButtonStyle
+              : buttonStyle
+          }
           onClick={() => {
-            dispatch(selectSection("USERS"));
+            navigate("/home/users");
           }}
         >
           ניהול משתמשים
         </Button>
         <Button
-          sx={selectedSection == "BOOKS" ? selectedButtonStyle : buttonStyle}
+          sx={
+            location.pathname == "/home/books"
+              ? selectedButtonStyle
+              : buttonStyle
+          }
           onClick={() => {
-            dispatch(selectSection("BOOKS"));
+            navigate("/home/books");
           }}
         >
           ניהול ספרים
         </Button>
         <Button
-          sx={selectedSection == "AUTHORS" ? selectedButtonStyle : buttonStyle}
+          sx={
+            location.pathname == "/home/authors"
+              ? selectedButtonStyle
+              : buttonStyle
+          }
           onClick={() => {
-            dispatch(selectSection("AUTHORS"));
+            navigate("/home/authors");
           }}
         >
           ניהול סופרים

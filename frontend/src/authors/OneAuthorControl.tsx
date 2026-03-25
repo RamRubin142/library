@@ -4,19 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import styles from "./style/OneAuthorControl.module.css";
+import type { AuthorInterface } from "../models/authors/AuthorInterface";
 export const OneAuthorControl = () => {
   const selectedAuthorId = useSelector(
     (state: RootState) => state.author.selectedAuthorId
   );
-  interface BookInterface {
-    _id: string;
-    name: string;
-  }
-  interface AuthorInterface {
-    _id: string;
-    name: string;
-    books: BookInterface[];
-  }
 
   const { data: author } = useQuery<AuthorInterface>({
     queryKey: ["author", selectedAuthorId],
@@ -43,12 +35,25 @@ export const OneAuthorControl = () => {
       >
         <div className={styles.topBar}>
           <div>
-            הספרים של <b>{author.name}</b> :
+            {author.books.length > 0 ? (
+              <div>
+                הספרים של <b>{author.name}</b> :
+              </div>
+            ) : (
+              <div>
+                ל <b>{author.name}</b> אין ספרים
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.booksArea}>
           {author.books.map((book) => (
-            <Book key={book._id} id={book._id} name={book.name} />
+            <Book
+              key={book._id}
+              id={book.serialId}
+              name={book.name}
+              serialId={book.serialId}
+            />
           ))}
         </div>
       </Box>

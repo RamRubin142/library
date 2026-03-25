@@ -1,27 +1,15 @@
 import { Box, Toolbar, Typography, Button } from "@mui/material";
-import { useSelector } from "react-redux";
-import type { RootState } from "./redux/store";
 import { useQuery } from "@tanstack/react-query";
-import { logUserIn } from "./redux/loggedSlice";
-import { useDispatch } from "react-redux";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
+import type { BookInterface } from "./models/books/BookInterface";
+import type { UserInterface } from "./models/users/UserInterface";
+import { useNavigate } from "react-router-dom";
 export const TitleBar = () => {
-  const dispatch = useDispatch();
-  const currentUserId = useSelector(
-    (state: RootState) => state.currentUser.loggedInUserId
-  );
-  interface BookInterface {
-    _id: string;
-    name: string;
-  }
-  interface UserInterface {
-    _id: string;
-    name: string;
+  const navigate = useNavigate();
+  const currentUserId = localStorage.getItem("loggedUser");
 
-    favorite: string;
-  }
   const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
   const { data: user } = useQuery<UserInterface>({
     queryKey: ["user", currentUserId],
@@ -37,6 +25,12 @@ export const TitleBar = () => {
         res.json()
       ),
   });
+
+  const handleLogout = () => {
+    localStorage.setItem("loggedUser", "")
+    setLogoutPopupOpen(false);
+    navigate("/login");
+  };
 
   return (
     <Box sx={{ border: 1 }}>
@@ -73,10 +67,7 @@ export const TitleBar = () => {
           <DialogTitle>האם אתה בטוח שברצונך להתנתק ?</DialogTitle>
           <Box>
             <Button
-              onClick={() => {
-                dispatch(logUserIn(""));
-                setLogoutPopupOpen(false);
-              }}
+              onClick={handleLogout}
             >
               כן
             </Button>

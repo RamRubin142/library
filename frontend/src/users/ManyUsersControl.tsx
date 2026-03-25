@@ -5,19 +5,16 @@ import { selectUser } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
-import { logUserIn } from "../redux/loggedSlice";
+import type { UserInterface } from "../models/users/UserInterface";
+import { useNavigate } from "react-router-dom";
 export const ManyUsersControl = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  interface UserInterface {
-    _id: string;
-    name: string;
-  }
+
   const selectedUserId = useSelector(
     (state: RootState) => state.user.selectedUserId
   );
-  const loggedUserId = useSelector(
-    (state: RootState) => state.currentUser.loggedInUserId
-  );
+  const loggedUserId = localStorage.getItem("loggedUser");
 
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],
@@ -39,7 +36,9 @@ export const ManyUsersControl = () => {
         dispatch(selectUser(""));
       }
       if(variables.userId == loggedUserId) {
-        dispatch(logUserIn(""));
+        localStorage.setItem("loggedUser", "");
+        navigate("/login");
+
       }
     },
   });
@@ -75,6 +74,7 @@ export const ManyUsersControl = () => {
           key={user._id}
           id={user._id}
           name={user.name}
+          serialId={user.serialId}
           onDelete={(id: string) => {
             deleteMutation.mutate({ userId: id });
           }}

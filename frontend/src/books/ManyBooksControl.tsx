@@ -5,13 +5,10 @@ import { selectBook } from "../redux/bookSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
+import type { BookInterface } from "../models/books/BookInterface";
 export const ManyBooksControl = () => {
   const dispatch = useDispatch();
-  interface BookInterface {
-    _id: string;
-    name: string;
-    author: { _id: string; name: string };
-  }
+
   const selectedBookId = useSelector(
     (state: RootState) => state.book.selectedBookId
   );
@@ -73,6 +70,7 @@ export const ManyBooksControl = () => {
         <Book
           key={book._id}
           id={book._id}
+          serialId={book.serialId}
           name={book.name}
           author={book.author.name}
           onDelete={(id: string) => {

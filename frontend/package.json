@@ -20,6 +20,7 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.13.2",
     "stylis": "^4.3.6",
     "stylis-plugin-rtl": "^2.1.1"
   },

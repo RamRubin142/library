@@ -8,6 +8,7 @@ import { store } from "./redux/store";
 import createCache from "@emotion/cache";
 import rtlPlugin from "@mui/stylis-plugin-rtl";
 import { prefixer } from "stylis";
+import { BrowserRouter } from "react-router-dom";
 
 const rtlCache = createCache({
   key: "mui-rtl",
@@ -28,7 +29,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <CacheProvider value={rtlCache}>
         <ThemeProvider theme={theme}>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </ThemeProvider>
       </CacheProvider>
     </Provider>

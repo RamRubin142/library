@@ -9,6 +9,7 @@ import { authorSlice } from "../redux/authorSlice";
 type authorProps = {
   name: string;
   id: string;
+  serialId : string,
   onDelete: (id: string) => void;
   onUpdate: (id: string, newName: string) => void;
   onSelect: (id: string) => void;
@@ -46,7 +47,7 @@ export const Author = (props: authorProps) => {
       onClick={() => props.onSelect(props.id)}
     >
       <div className={styles.name}>
-        <div className={styles.topText}>{`מזהה : ${props.id}   שם : `}</div>
+        <div className={styles.topText}>{`מזהה : ${props.serialId}   שם : `}</div>
         <div>
           {(props.id == currentlyEditedAuthor) ? (
             <input

@@ -9,6 +9,7 @@ import { UserSlice } from "../redux/userSlice";
 type userProps = {
   name: string;
   id: string;
+  serialId :string;
   onDelete: (id: string) => void;
   onUpdate: (id: string, newName: string) => void;
   onSelect: (id: string) => void;
@@ -52,7 +53,7 @@ export const User = (props: userProps) => {
       onClick={() => props.onSelect(props.id)}
     >
       <div className={styles.name}>
-        <div className={styles.text}>{` מזהה : ${props.id}   `}</div>
+        <div className={styles.text}>{` מזהה : ${props.serialId}   `}</div>
         <div>
           {props.id == currentlyEditedUser ? (
             <input

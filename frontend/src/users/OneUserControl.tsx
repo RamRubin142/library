@@ -5,21 +5,14 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
+import type { UserInterface } from "../models/users/UserInterface";
+import type { BookInterface } from "../models/books/BookInterface";
 export const OneUserControl = () => {
+  const loggedUser = localStorage.getItem("loggedUser");
   const selectedUserId = useSelector(
     (state: RootState) => state.user.selectedUserId
   );
-  interface BookInterface {
-    _id: string;
-    name: string;
-    author: {_id :string, name: string}
-  }
-  interface UserInterface {
-    _id: string;
-    name: string;
-    books: BookInterface[];
-    favorite: string;
-  }
+  const selectedUserIsLogged = (loggedUser == selectedUserId);
   const queryClient = useQueryClient();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -107,44 +100,65 @@ export const OneUserControl = () => {
   }
 
   return (
-    <Box sx={{ border: 1, height: "80vh", padding: "20px", width: "50%", overflowY : "scroll" }}>
+    <Box
+      sx={{
+        border: 1,
+        height: "80vh",
+        padding: "20px",
+        width: "50%",
+        overflowY: "scroll",
+      }}
+    >
       <div className={styles.topBar}>
         <div>
-          הספרים שקרא <b>{user.name}</b> :
+          {user.books.length > 0 ? (
+            <div>
+              הספרים ש <b>{user.name}</b> קרא:
+            </div>
+          ) : (
+            <div>
+              ל <b>{user.name}</b> אין ספרים שהוא קרא
+            </div>
+          )}
         </div>
-        <div>
-          <button className={styles.addButton} onClick={handleAddBookButton}>
-            הוסף ספר
-          </button>
-          <Popper id={id} open={open} anchorEl={anchorEl} >
-            <Box
-              sx={{
-                border: 1,
-                p: 1,
-                bgcolor: "background.paper",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {books
-                ?.filter((book) => !listOfBookIds?.includes(book._id))
-                .map((book) => (
-                  <div
-                    className={styles.addBookComponent}
-                    onClick={() => handleAddBook(book._id)}
-                  >
-                    {book.name}
-                  </div>
-                ))}
-            </Box>
-          </Popper>
-        </div>
+        {selectedUserIsLogged ? (
+          <div>
+            <button className={styles.addButton} onClick={handleAddBookButton}>
+              הוסף ספר
+            </button>
+            <Popper id={id} open={open} anchorEl={anchorEl}>
+              <Box
+                sx={{
+                  border: 1,
+                  p: 1,
+                  bgcolor: "background.paper",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                {books
+                  ?.filter((book) => !listOfBookIds?.includes(book._id))
+                  .map((book) => (
+                    <div
+                      className={styles.addBookComponent}
+                      onClick={() => handleAddBook(book._id)}
+                    >
+                      {book.name}
+                    </div>
+                  ))}
+              </Box>
+            </Popper>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
       <div className={styles.booksArea}>
         {user.books.map((book) => (
           <Book
             key={book._id}
             id={book._id}
+            serialId={book.serialId}
             name={book.name}
             author={book.author.name}
             onDelete={(bookId: string) => {

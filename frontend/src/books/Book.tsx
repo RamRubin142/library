@@ -10,6 +10,7 @@ type bookProps = {
   name: string;
   id: string;
   author: string;
+  serialId :string;
   onDelete: (id: string) => void;
   onUpdate: (id: string, newName: string) => void;
   onSelect: (id: string) => void;
@@ -55,7 +56,7 @@ export const Book = (props: bookProps) => {
     >
       <div className={styles.info}>
         <div className={styles.name}>
-          <div className={styles.topText}>{`מזהה : ${props.id}   שם : `}</div>
+          <div className={styles.topText}>{`מזהה : ${props.serialId}   שם : `}</div>
           <div>
             {props.id == currentlyEditedBook ? (
               <input

@@ -1,10 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import mongoose from 'mongoose';
-import { Book } from '../../books/schemas/book.schema';
-export type AuthorDocument = Author & Document;
+import { Book, BookDocument } from './book.schema';
+export type AuthorDocument = Author & {
+  _id: mongoose.Types.ObjectId;
+}  & Document;
 @Schema()
 export class Author {
+
+
   @Prop()
   name: string;
 
@@ -12,6 +16,9 @@ export class Author {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
     default: [],
   })
-  books: Book[];
+  books: BookDocument[];
+
+  @Prop()
+  serialId : string;
 }
 export const AuthorSchema = SchemaFactory.createForClass(Author);

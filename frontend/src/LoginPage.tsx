@@ -4,16 +4,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { Box, Typography, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import {Select} from "@mui/material"
-import { logUserIn } from "./redux/loggedSlice";
-import { useDispatch } from "react-redux";
-
+import { Select } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import type { UserInterface } from "./models/users/UserInterface";
 export const LoginPage = () => {
-  interface UserInterface {
-    _id: string;
-    name: string;
-  }
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],
@@ -23,6 +18,10 @@ export const LoginPage = () => {
 
   const [selectedUser, selectUser] = React.useState("");
 
+  const handleLogin = async () => {
+    localStorage.setItem("loggedUser", selectedUser);
+    navigate("/home");
+  };
 
   return (
     <Box
@@ -57,7 +56,7 @@ export const LoginPage = () => {
           width: "150px",
           marginTop: "50px",
         }}
-        onClick={() => dispatch(logUserIn(selectedUser))}
+        onClick={handleLogin}
       >
         התחבר
       </Button>

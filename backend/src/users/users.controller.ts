@@ -9,30 +9,32 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { User } from './schemas/user.schema';
+import { User, UserDocument } from '../schemas/user.schema';
 import type { CreateUserDto } from './dto/create-user.dto';
-import type { UpdateUserDto, EditBooksDto } from './dto/update-user.dto';
-
+import type { UpdateUserDto} from './dto/update-user.dto';
+import type  {EditBooksDto} from './dto/edit-user-books.dto'
 @Controller('users')
 export class UsersController {
   constructor(private readonly UsersService: UsersService) {}
   @Get(':id')
-  async getUser(@Param('id') id: string): Promise<User | null> {
+  async getUser(@Param('id') id: string): Promise<UserDocument | null> {
     return this.UsersService.getUserById(id);
   }
   @Get()
-  async getUsers(): Promise<User[] | null> {
+  async getUsers(): Promise<UserDocument[] | null> {
     return this.UsersService.getUser();
   }
   @Post()
-  async createUser(@Body() createUserDto: CreateUserDto): Promise<User | null> {
+  async createUser(
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<UserDocument | null> {
     return this.UsersService.createUser(createUserDto.name);
   }
   @Patch(':id')
   async updateUser(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
-  ): Promise<User | null> {
+  ): Promise<UserDocument | null> {
     return this.UsersService.updateUser(id, updateUserDto);
   }
   @Delete(':id')
@@ -43,21 +45,21 @@ export class UsersController {
   async addBook(
     @Param('id') userId: string,
     @Body() editBooksDto: EditBooksDto,
-  ): Promise<User | null> {
+  ): Promise<UserDocument | null> {
     return this.UsersService.addBook(userId, editBooksDto.bookId);
   }
   @Delete('/books/:id')
   async removeBook(
     @Param('id') userId: string,
     @Body() editBooksDto: EditBooksDto,
-  ): Promise<User | null> {
+  ): Promise<UserDocument | null> {
     return this.UsersService.deleteBook(userId, editBooksDto.bookId);
   }
   @Patch('/books/:id')
   async favoriteBook(
     @Param('id') userId: string,
     @Body('bookId') bookId: string,
-  ): Promise<User | null> {
+  ): Promise<UserDocument | null> {
     return this.UsersService.favoriteBook(userId, bookId);
   }
 }
