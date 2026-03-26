@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import type { UserInterface } from "../models/users/UserInterface";
 import { useNavigate } from "react-router-dom";
+import {getUsers, deleteUserById, updateUserNameById} from "../api/users.api"
 export const ManyUsersControl = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,16 +20,14 @@ export const ManyUsersControl = () => {
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],
     queryFn: () =>
-      fetch("http://localhost:4000/users").then((res) => res.json()),
+      getUsers(),
   });
 
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
     mutationFn: (variables: { userId: string }) => {
-      return fetch("http://localhost:4000/users/" + variables.userId, {
-        method: "DELETE",
-      });
+      return deleteUserById(variables.userId);
     },
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
@@ -45,13 +44,7 @@ export const ManyUsersControl = () => {
 
   const editMutation = useMutation({
     mutationFn: (variables: { userId: string; newName: string }) => {
-      return fetch("http://localhost:4000/users/" + variables.userId, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: variables.newName }),
-      });
+      return updateUserNameById(variables.userId, variables.newName);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });

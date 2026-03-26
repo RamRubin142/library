@@ -7,6 +7,11 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { selectBook } from "../redux/bookSlice";
 import { type AuthorInterface } from "../models/authors/AuthorInterface";
+import {
+  getAuthors,
+  deleteAuthorById,
+  updateAuthorNameById,
+} from "../api/authors.api";
 export const ManyAuthorsControl = () => {
   const dispatch = useDispatch();
   
@@ -19,16 +24,14 @@ export const ManyAuthorsControl = () => {
   const { data: authors = [] } = useQuery<AuthorInterface[]>({
     queryKey: ["authors"],
     queryFn: () =>
-      fetch("http://localhost:4000/authors").then((res) => res.json()),
+      getAuthors(),
   });
 
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
     mutationFn: (variables: { authorId: string }) => {
-      return fetch("http://localhost:4000/authors/" + variables.authorId, {
-        method: "DELETE",
-      });
+      return deleteAuthorById(variables.authorId);
     },
     onSuccess: (_data, variables) => {
       dispatch(selectBook(""));
@@ -47,13 +50,7 @@ export const ManyAuthorsControl = () => {
 
   const editMutation = useMutation({
     mutationFn: (variables: { authorId: string; newName: string }) => {
-      return fetch("http://localhost:4000/authors/" + variables.authorId, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: variables.newName }),
-      });
+      return updateAuthorNameById(variables.authorId, variables.newName);
     },
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["authors"] });

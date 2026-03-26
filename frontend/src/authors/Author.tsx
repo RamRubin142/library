@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import styles from "./style/Author.module.css";
 import type { KeyboardEvent, ChangeEvent } from "react";
 import { useSelector } from "react-redux";
@@ -46,9 +46,9 @@ export const Author = (props: authorProps) => {
       }
       onClick={() => props.onSelect(props.id)}
     >
-      <div className={styles.name}>
-        <div className={styles.topText}>{`מזהה : ${props.serialId}   שם : `}</div>
-        <div>
+      <Box className={styles.name}>
+        <Box >{`מזהה : ${props.serialId}   שם : `}</Box>
+        <Box>
           {(props.id == currentlyEditedAuthor) ? (
             <input
               className={styles.editBox}
@@ -60,11 +60,11 @@ export const Author = (props: authorProps) => {
               onKeyDown={editTaskHandler}
             />
           ) : (
-            <p className={styles.bottomText}>{props.name}</p>
+            <Typography className={styles.bottomText}>{props.name}</Typography>
           )}
-        </div>
-      </div>
-      <div className={styles.buttons}>
+        </Box>
+      </Box>
+      <Box className={styles.buttons}>
         <button
           className={styles.editButton}
           onClick={() => dispatch(authorSlice.actions.setAuthorIsEdited({authorId : props.id, authorText : props.name}))}
@@ -79,7 +79,7 @@ export const Author = (props: authorProps) => {
         >
           מחק
         </button>
-      </div>
+      </Box>
     </Box>
   );
 };

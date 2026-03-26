@@ -1,0 +1,11 @@
+{
+  "name": "frontend",
+  "targets": {
+    "serve": {
+      "command": "npm run dev",
+      "options": {
+        "cwd": "frontend"
+      }
+    }
+  }
+}

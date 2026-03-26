@@ -3,7 +3,8 @@ import { User } from "./User";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
+import {getBookById } from "../api/books.api";
+import { deleteBooksFromUser } from "../api/users.api";
 import styles from "./style/OneBookControl.module.css";
 import type { BookInterface } from "../models/books/BookInterface";
 export const OneBookControl = () => {
@@ -16,20 +17,12 @@ export const OneBookControl = () => {
   const { data: book } = useQuery<BookInterface>({
     queryKey: ["book", selectedBookId],
     queryFn: () =>
-      fetch("http://localhost:4000/books/" + selectedBookId).then((res) =>
-        res.json()
-      ),
+      getBookById(selectedBookId),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (variables: { bookId: string; userId: string }) => {
-      return fetch("http://localhost:4000/users/books/" + variables.userId, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ bookId: variables.bookId }),
-      });
+      return deleteBooksFromUser(variables.userId, variables.bookId);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["book"] });
@@ -56,18 +49,25 @@ export const OneBookControl = () => {
         overflowY: "scroll",
       }}
     >
-      <div className={styles.topBar}>
+      <Box className={styles.topBar}>
         {book.readers.length > 0 ? (
-          <div>
-            הקוראים של <b>{book.name}</b> :
-          </div>
+          <Box className={styles.topBarText}>
+            הקוראים של{" "}
+            <Box className={styles.title}>
+              <b>{book.name}</b>
+            </Box>{" "}
+          </Box>
         ) : (
-          <div>
-            ל <b>{book.name}</b> אין קוראים
-          </div>
+          <Box className={styles.topBarText}>
+            ל{" "}
+            <Box className={styles.title}>
+              <b>{book.name}</b>
+            </Box>{" "}
+            אין קוראים
+          </Box>
         )}
-      </div>
-      <div className={styles.booksArea}>
+      </Box>
+      <Box className={styles.booksArea}>
         {book.readers.map((reader) => (
           <User
             key={reader._id}
@@ -79,7 +79,7 @@ export const OneBookControl = () => {
             }}
           />
         ))}
-      </div>
+      </Box>
     </Box>
   );
 };

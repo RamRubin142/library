@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "targets": {
+    "serve": {
+      "command": "npm start",
+      "options": {
+        "cwd": "backend"
+      }
+    }
+  }
+}

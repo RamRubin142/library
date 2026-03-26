@@ -12,9 +12,9 @@ export const Book = (props: bookProps) => {
 
   return (
     <Box className={styles.bookContainer}>
-      <div className={styles.name}>
-        <div className={styles.text}>{` מזהה : ${props.serialId}  שם : ${props.name} `}</div>
-      </div>
+      <Box className={styles.name}>
+        <Box className={styles.text}>{` מזהה : ${props.serialId}  שם : ${props.name} `}</Box>
+      </Box>
     </Box>
   );
 };

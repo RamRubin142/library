@@ -10,6 +10,8 @@ import rtlPlugin from "@mui/stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import { BrowserRouter } from "react-router-dom";
 
+
+
 const rtlCache = createCache({
   key: "mui-rtl",
   stylisPlugins: [prefixer, rtlPlugin],
@@ -23,7 +25,6 @@ const theme = createTheme({
 document.body.dir = "rtl";
 
 const queryClient = new QueryClient();
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>

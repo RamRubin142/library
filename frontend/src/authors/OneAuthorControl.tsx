@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import styles from "./style/OneAuthorControl.module.css";
 import type { AuthorInterface } from "../models/authors/AuthorInterface";
+import {getAuthorById} from "../api/authors.api"
 export const OneAuthorControl = () => {
   const selectedAuthorId = useSelector(
     (state: RootState) => state.author.selectedAuthorId
@@ -13,7 +14,7 @@ export const OneAuthorControl = () => {
   const { data: author } = useQuery<AuthorInterface>({
     queryKey: ["author", selectedAuthorId],
     queryFn: () =>
-      fetch("http://localhost:4000/authors/" + selectedAuthorId).then((res) => res.json()),
+      getAuthorById(selectedAuthorId),
   });
 
   if (!author || !selectedAuthorId || Array.isArray(author)) {
@@ -33,20 +34,27 @@ export const OneAuthorControl = () => {
           overflowY: "scroll",
         }}
       >
-        <div className={styles.topBar}>
-          <div>
+        <Box className={styles.topBar}>
+          <Box>
             {author.books.length > 0 ? (
-              <div>
-                הספרים של <b>{author.name}</b> :
-              </div>
+              <Box className={styles.topBarText}>
+                הספרים של{" "}
+                <Box className={styles.title}>
+                  <b>{author.name}</b>
+                </Box>{" "}
+              </Box>
             ) : (
-              <div>
-                ל <b>{author.name}</b> אין ספרים
-              </div>
+              <Box className={styles.topBarText}>
+                ל{" "}
+                <Box className={styles.title}>
+                  <b>{author.name}</b>
+                </Box>{" "}
+                אין ספרים
+              </Box>
             )}
-          </div>
-        </div>
-        <div className={styles.booksArea}>
+          </Box>
+        </Box>
+        <Box className={styles.booksArea}>
           {author.books.map((book) => (
             <Book
               key={book._id}
@@ -55,7 +63,7 @@ export const OneAuthorControl = () => {
               serialId={book.serialId}
             />
           ))}
-        </div>
+        </Box>
       </Box>
     );
   }

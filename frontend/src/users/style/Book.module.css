@@ -6,16 +6,14 @@
   border: 1px solid blue;
   border-radius: 10px;
   margin-bottom: 10px;
- 
 }
 
 .name {
   display: flex;
-  padding-right : 5px;
+  padding-right: 5px;
   flex-direction: column;
   margin-bottom: 0;
 }
-
 
 .buttons {
   display: flex;
@@ -48,33 +46,44 @@
 }
 
 .addButton {
-    color : blue;
-    width : 40px;
+  color: blue;
+  width: 40px;
 }
 
 .topText {
   margin-top: 1px;
   margin-bottom: 2px;
   font-size: large;
-  white-space: pre-wrap;
-
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
+  height: 1.2em;
+  white-space: nowrap;
+  margin-right: 4px !important;
+  margin-left: 4px !important;
 }
 .bottomText {
   margin-top: 0;
   margin-bottom: 2px;
   font-size: large;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
+  height: 1.2em;
+  white-space: nowrap;
+  margin-right: 4px !important;
+  margin-left: 4px !important;
 }
-
 
 .notFavoriteButton {
   background-image: url("https://cdn-icons-png.freepik.com/128/7269/7269775.png");
-  border : none;
+  border: none;
   background-color: white;
   background-repeat: no-repeat;
   background-position: 50% 17%;
   background-size: 20px;
-  height : 50px;
-  width :30px;
+  height: 50px;
+  width: 30px;
 }
 .notFavoriteButton:hover {
   background-size: 27px;
@@ -82,13 +91,13 @@
 
 .favoriteButton {
   background-image: url("https://cdn-icons-png.freepik.com/128/7269/7269753.png");
-  border : none;
+  border: none;
   background-color: white;
   background-repeat: no-repeat;
   background-position: 50% 17%;
   background-size: 20px;
-  height : 50px;
-  width :30px;
+  height: 50px;
+  width: 30px;
 }
 .favoriteButton:hover {
   background-size: 27px;

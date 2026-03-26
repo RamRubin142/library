@@ -52,9 +52,9 @@ export const User = (props: userProps) => {
       }
       onClick={() => props.onSelect(props.id)}
     >
-      <div className={styles.name}>
-        <div className={styles.text}>{` מזהה : ${props.serialId}   `}</div>
-        <div>
+      <Box className={styles.name}>
+        <Box className={styles.text}>{` מזהה : ${props.serialId}   `}</Box>
+        <Box>
           {props.id == currentlyEditedUser ? (
             <input
               className={styles.editBox}
@@ -71,11 +71,11 @@ export const User = (props: userProps) => {
               onKeyDown={editTaskHandler}
             />
           ) : (
-            <p>שם : {props.name}</p>
+            <Box className={styles.nameBox}>שם : {props.name}</Box>
           )}
-        </div>
-      </div>
-      <div className={styles.buttons}>
+        </Box>
+      </Box>
+      <Box className={styles.buttons}>
         <button
           className={styles.editButton}
           onClick={() =>
@@ -92,7 +92,7 @@ export const User = (props: userProps) => {
         <button className={styles.deleteButton} onClick={handleDelete}>
           מחק
         </button>
-      </div>
+      </Box>
     </Box>
   );
 };

@@ -6,17 +6,13 @@
   border: 1px solid blue;
   border-radius: 10px;
   margin-bottom: 10px;
- 
 }
-
-
 
 .name {
   display: flex;
   margin-right: 6px;
   flex-direction: row;
   align-items: center;
-  
 }
 
 .buttons {
@@ -75,8 +71,12 @@
   font-size: 16px;
 }
 
-
 .text {
-  white-space: pre-wrap;
-
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
+  height: 1.2em;
+  white-space: nowrap;
+  margin-right: 4px !important;
+  margin-left: 4px !important;
 }

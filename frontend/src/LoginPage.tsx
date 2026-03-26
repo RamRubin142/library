@@ -7,13 +7,15 @@ import { useQuery } from "@tanstack/react-query";
 import { Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import type { UserInterface } from "./models/users/UserInterface";
+import {getUsers} from "./api/users.api"
+import styles from "./LoginPage.module.css";
 export const LoginPage = () => {
   const navigate = useNavigate();
 
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],
     queryFn: () =>
-      fetch("http://localhost:4000/users").then((res) => res.json()),
+      getUsers(),
   });
 
   const [selectedUser, selectUser] = React.useState("");
@@ -44,7 +46,7 @@ export const LoginPage = () => {
           }}
         >
           {users.map((user) => (
-            <MenuItem value={user._id}>{user.name}</MenuItem>
+            <MenuItem value={user._id} className={styles.text}>{user.name}</MenuItem>
           ))}
         </Select>
       </FormControl>

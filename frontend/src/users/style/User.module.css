@@ -87,6 +87,15 @@
 .editBox {
   font-size: 16px;
 }
+.nameBox {
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  max-width: 200px; 
+  height: 1.2em; 
+  white-space: nowrap;
+  margin-right: 4px !important;
+  margin-left: 4px !important;
+}
 
 
 .text {

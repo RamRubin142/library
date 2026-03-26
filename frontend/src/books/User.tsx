@@ -16,14 +16,14 @@ export const User = (props: userProps) => {
 
   return (
     <Box className={styles.userContainer}>
-      <div className={styles.name}>
-        <div className={styles.text}>{` מזהה : ${props.serialId}  שם : ${props.name} `}</div>
-      </div>
-      <div className={styles.buttons}>
+      <Box className={styles.name}>
+        <Box className={styles.text}>{` מזהה : ${props.serialId}  שם : ${props.name} `}</Box>
+      </Box>
+      <Box className={styles.buttons}>
         <button className={styles.deleteButton} onClick={handleDelete}>
           מחק
         </button>
-      </div>
+      </Box>
     </Box>
   );
 };

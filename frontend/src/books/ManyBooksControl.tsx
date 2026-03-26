@@ -6,6 +6,11 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import type { BookInterface } from "../models/books/BookInterface";
+import {
+  getBooks,
+  deleteBookById,
+  updateBookNameById,
+} from "../api/books.api";
 export const ManyBooksControl = () => {
   const dispatch = useDispatch();
 
@@ -16,16 +21,14 @@ export const ManyBooksControl = () => {
   const { data: books = [] } = useQuery<BookInterface[]>({
     queryKey: ["books"],
     queryFn: () =>
-      fetch("http://localhost:4000/books").then((res) => res.json()),
+      getBooks(),
   });
 
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
     mutationFn: (variables: { bookId: string }) => {
-      return fetch("http://localhost:4000/books/" + variables.bookId, {
-        method: "DELETE",
-      });
+      return deleteBookById(variables.bookId);
     },
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["books"] });
@@ -41,13 +44,7 @@ export const ManyBooksControl = () => {
 
   const editMutation = useMutation({
     mutationFn: (variables: { bookId: string; newName: string }) => {
-      return fetch("http://localhost:4000/books/" + variables.bookId, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: variables.newName }),
-      });
+      return updateBookNameById(variables.bookId, variables.newName);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["books"] });

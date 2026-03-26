@@ -1,0 +1,10 @@
+
+.title {
+  text-overflow: ellipsis !important; 
+  overflow: hidden !important;
+  max-width : 200px !important;
+  height: 1.2em !important;
+  white-space: nowrap !important;
+  margin-right: 4px !important;
+  margin-left: 4px !important;
+}

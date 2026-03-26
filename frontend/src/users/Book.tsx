@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import styles from "./style/Book.module.css";
 type bookProps = {
   name: string;
@@ -22,15 +22,17 @@ export const Book = (props: bookProps) => {
 
   return (
     <Box className={styles.bookContainer}>
-      <div className={styles.name}>
-        <p className={styles.topText}>
+      <Box className={styles.name}>
+        <Typography className={styles.topText}>
           {`מזהה : ${props.serialId}    שם : ${props.name}`}
-        </p>
-        <p className={styles.bottomText}>סופר : {props.author}</p>
-      </div>
+        </Typography>
+        <Typography className={styles.bottomText}>
+          סופר : {props.author}
+        </Typography>
+      </Box>
       {userIsLogged ? (
-        <div className={styles.buttons}>
-          <div>
+        <Box className={styles.buttons}>
+          <Box>
             {isFavorite ? (
               <button
                 className={styles.favoriteButton}
@@ -46,13 +48,13 @@ export const Book = (props: bookProps) => {
                 }}
               ></button>
             )}
-          </div>
+          </Box>
           <button className={styles.deleteButton} onClick={handleDelete}>
             מחק
           </button>
-        </div>
+        </Box>
       ) : (
-        <div></div>
+        <Box></Box>
       )}
     </Box>
   );

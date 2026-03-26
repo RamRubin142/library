@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import styles from "./style/Book.module.css";
 import type { KeyboardEvent, ChangeEvent } from "react";
 import { useSelector } from "react-redux";
@@ -54,10 +54,10 @@ export const Book = (props: bookProps) => {
       }
       onClick={() => props.onSelect(props.id)}
     >
-      <div className={styles.info}>
-        <div className={styles.name}>
-          <div className={styles.topText}>{`מזהה : ${props.serialId}   שם : `}</div>
-          <div>
+      <Box className={styles.info}>
+        <Box className={styles.name}>
+          <Box >{`מזהה : ${props.serialId}   שם : `}</Box>
+          <Box>
             {props.id == currentlyEditedBook ? (
               <input
                 className={styles.editBox}
@@ -74,13 +74,13 @@ export const Book = (props: bookProps) => {
                 onKeyDown={editTaskHandler}
               />
             ) : (
-              <p className={styles.bottomText}>{props.name}</p>
+              <Typography className={styles.bottomText}>{props.name}</Typography>
             )}
-          </div>
-        </div>
-        <p className={styles.bottomText}>סופר : {props.author}</p>
-      </div>
-      <div className={styles.buttons}>
+          </Box>
+        </Box>
+        <Typography className={styles.bottomText}>סופר : {props.author}</Typography>
+      </Box>
+      <Box className={styles.buttons}>
         <button
           className={styles.editButton}
           onClick={() =>
@@ -97,7 +97,7 @@ export const Book = (props: bookProps) => {
         <button className={styles.deleteButton} onClick={handleDelete}>
           מחק
         </button>
-      </div>
+      </Box>
     </Box>
   );
 };

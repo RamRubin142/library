@@ -1,12 +1,14 @@
-import { Box, Popper } from "@mui/material";
+import { Box, Button, Dialog, DialogTitle } from "@mui/material";
 import { Book } from "./Book";
 import styles from "./style/OneUsersControl.module.css";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import { useState } from "react";
 import type { UserInterface } from "../models/users/UserInterface";
 import type { BookInterface } from "../models/books/BookInterface";
+import { getUserById, favoriteBooksOfUser, deleteBooksFromUser, addBooksToUser } from "../api/users.api";
+import  {getBooks} from "../api/books.api";
 export const OneUserControl = () => {
   const loggedUser = localStorage.getItem("loggedUser");
   const selectedUserId = useSelector(
@@ -14,62 +16,47 @@ export const OneUserControl = () => {
   );
   const selectedUserIsLogged = (loggedUser == selectedUserId);
   const queryClient = useQueryClient();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [addBookPopupIsOpen, setAddBookPopupIsOpen] =useState(false);
 
-  const handleAddBookButton = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+  const handleAddBookButton = () => {
+    setAddBookPopupIsOpen(true);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
 
   const handleAddBook = (bookId: string) => {
     if (selectedUserId) {
       addBookMutation.mutate({ bookId, userId: selectedUserId });
-      setAnchorEl(null);
+      setAddBookPopupIsOpen(false);
     }
   };
 
   const { data: user } = useQuery<UserInterface>({
     queryKey: ["user", selectedUserId],
     queryFn: () =>
-      fetch("http://localhost:4000/users/" + selectedUserId).then((res) =>
-        res.json()
-      ),
+      getUserById(selectedUserId),
   });
 
   const { data: books } = useQuery<BookInterface[]>({
     queryKey: ["books"],
     queryFn: () =>
-      fetch("http://localhost:4000/books/").then((res) => res.json()),
+      getBooks(),
   });
 
   const listOfBookIds = user?.books?.map((book) => book._id);
 
   const deleteMutation = useMutation({
     mutationFn: (variables: { bookId: string; userId: string }) => {
-      return fetch("http://localhost:4000/users/books/" + variables.userId, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ bookId: variables.bookId }),
-      });
+      return deleteBooksFromUser(variables.userId, variables.bookId);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["favBook"] });
     },
   });
 
   const addBookMutation = useMutation({
     mutationFn: (variables: { bookId: string; userId: string }) => {
-      return fetch("http://localhost:4000/users/books/" + variables.userId, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ bookId: variables.bookId }),
-      });
+      return addBooksToUser(variables.userId, variables.bookId);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
@@ -78,13 +65,7 @@ export const OneUserControl = () => {
 
   const favoriteMutation = useMutation({
     mutationFn: (variables: { bookId: string; userId: string }) => {
-      return fetch("http://localhost:4000/users/books/" + variables.userId, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ bookId: variables.bookId }),
-      });
+      return favoriteBooksOfUser(variables.userId, variables.bookId);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
@@ -109,51 +90,67 @@ export const OneUserControl = () => {
         overflowY: "scroll",
       }}
     >
-      <div className={styles.topBar}>
-        <div>
+      <Box className={styles.topBar}>
+        <Box>
           {user.books.length > 0 ? (
-            <div>
-              הספרים ש <b>{user.name}</b> קרא:
-            </div>
+            <Box className={styles.topBarText}>
+              הספרים ש{" "}
+              <Box className={styles.title}>
+                <b>{user.name}</b>
+              </Box>{" "}
+              קרא:
+            </Box>
           ) : (
-            <div>
-              ל <b>{user.name}</b> אין ספרים שהוא קרא
-            </div>
+            <Box className={styles.topBarText}>
+              ל{" "}
+              <Box className={styles.title}>
+                <b>{user.name}</b>
+              </Box>{" "}
+              אין ספרים שהוא קרא
+            </Box>
           )}
-        </div>
+        </Box>
         {selectedUserIsLogged ? (
-          <div>
+          <Box>
             <button className={styles.addButton} onClick={handleAddBookButton}>
               הוסף ספר
             </button>
-            <Popper id={id} open={open} anchorEl={anchorEl}>
-              <Box
-                sx={{
-                  border: 1,
-                  p: 1,
-                  bgcolor: "background.paper",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                {books
-                  ?.filter((book) => !listOfBookIds?.includes(book._id))
-                  .map((book) => (
-                    <div
-                      className={styles.addBookComponent}
-                      onClick={() => handleAddBook(book._id)}
-                    >
-                      {book.name}
-                    </div>
-                  ))}
-              </Box>
-            </Popper>
-          </div>
+            <Dialog open={addBookPopupIsOpen}>
+              {books &&
+              books.filter((book) => !listOfBookIds?.includes(book?._id))
+                ?.length > 0 ? (
+                <Box
+                  sx={{
+                    p: 1,
+                    bgcolor: "background.paper",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <DialogTitle>בחר ספר</DialogTitle>
+                  {books
+                    ?.filter((book) => !listOfBookIds?.includes(book._id))
+                    .map((book) => (
+                      <Box
+                        className={styles.addBookComponent}
+                        onClick={() => handleAddBook(book._id)}
+                      >
+                        {book.name}
+                      </Box>
+                    ))}
+                </Box>
+              ) : (
+                <DialogTitle>אין בספריה ספרים שעוד לא קראת</DialogTitle>
+              )}
+
+              <Button onClick={() => setAddBookPopupIsOpen(false)}>סגור</Button>
+            </Dialog>
+          </Box>
         ) : (
-          <div></div>
+          <Box></Box>
         )}
-      </div>
-      <div className={styles.booksArea}>
+      </Box>
+      <Box className={styles.booksArea}>
         {user.books.map((book) => (
           <Book
             key={book._id}
@@ -171,7 +168,7 @@ export const OneUserControl = () => {
             isFavorite={book._id == user.favorite}
           />
         ))}
-      </div>
+      </Box>
     </Box>
   );
 };
