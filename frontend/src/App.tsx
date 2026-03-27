@@ -1,9 +1,9 @@
-import { LoginPage } from "./LoginPage";
-import { MainPage } from "./MainPage";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { MainPage } from "./pages/MainPage/MainPage/MainPage";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import { UserControl } from "./users/UserControl";
-import { BookControl } from "./books/BookControl";
-import { AuthorControl } from "./authors/AuthorControl";
+import { UserControl } from "./pages/users/UserSection/UserSection";
+import { BookControl } from "./pages/books/BookSection/BookSection";
+import { AuthorControl } from "./pages/authors/AuthorSection/AuthorSection";
 export const App = () => {
   const PrivateRoutes = () => {
     let auth = localStorage.getItem("loggedUser") != "";
