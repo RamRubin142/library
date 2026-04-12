@@ -1,22 +1,28 @@
 import { Box } from "@mui/material";
-import { Author } from "../Author/Author";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { selectAuthor } from "../../../redux/authorSlice";
+import { selectAuthor, setAuthorIsEdited } from "../../../redux/authorSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store";
 import { selectBook } from "../../../redux/bookSlice";
 import { type AuthorInterface } from "../../../models/authors/AuthorInterface";
+import { SelectionSectionCard } from "../../../components/SelectionSectionCard/SelectionSectionCard";
 import {
-  getAuthors, 
+  getAuthors,
   deleteAuthorById,
   updateAuthorNameById,
 } from "../../../api/authors.api";
 export const ManyAuthorsControl = () => {
   const dispatch = useDispatch();
+  const editedAuthorId = useSelector(
+    (state: RootState) => state.author.editedAuthorId,
+  );
+  const editedAuthorText = useSelector(
+    (state: RootState) => state.author.editedAuthorText,
+  );
 
   const selectedAuthorId = useSelector(
-    (state: RootState) => state.author.selectedAuthorId
+    (state: RootState) => state.author.selectedAuthorId,
   );
 
   const { data: authors = [] } = useQuery<AuthorInterface[]>({
@@ -57,6 +63,14 @@ export const ManyAuthorsControl = () => {
     },
   });
 
+  const editButtonClicked = (authorId: string, authorText: string) => {
+    dispatch(setAuthorIsEdited({ authorId, authorText }));
+  };
+
+  const editTextChanged = (authorId: string, authorText: string) => {
+    dispatch(setAuthorIsEdited({ authorId, authorText }));
+  };
+
   return (
     <Box
       sx={{
@@ -68,7 +82,12 @@ export const ManyAuthorsControl = () => {
       }}
     >
       {authors.map((author) => (
-        <Author
+        <SelectionSectionCard
+          isSelected={selectedAuthorId == author._id}
+          isCurrentlyEdited={editedAuthorId == author._id}
+          currentlyEditedText={editedAuthorText}
+          onEditButtonChange={editButtonClicked}
+          onEditTextChange={editTextChanged}
           key={author._id}
           id={author._id}
           serialId={author.serialId}

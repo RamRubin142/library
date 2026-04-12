@@ -1,23 +1,20 @@
 import { Box, Typography } from "@mui/material";
-import styles from "./Book.module.css";
-type bookProps = {
+import styles from "./DataSectionCard.module.css";
+type DataSectionCardProps = {
   name: string;
   id: string;
-  author: string;
+  author?: string;
   serialId: string;
-  onDelete: (id: string) => void;
-  onFavoriteChange: (id: string) => void;
-  userId: string;
-  isFavorite: boolean;
+  onDelete?: (id: string) => void;
+  onFavoriteChange?: (id: string) => void;
+  userId?: string;
+  isFavorite?: boolean;
+  userIsLogged?: boolean;
 };
 
-export const Book = (props: bookProps) => {
-  const loggedUser = localStorage.getItem("loggedUser");
-  const userIsLogged = (loggedUser == props.userId);
-  const isFavorite = props.isFavorite;
-
+export const DataSectionCard = (props: DataSectionCardProps) => {
   const handleDelete = async () => {
-    props.onDelete(props.id);
+    props.onDelete?.(props.id);
   };
 
   return (
@@ -26,25 +23,29 @@ export const Book = (props: bookProps) => {
         <Typography className={styles.topText}>
           {`מזהה : ${props.serialId}    שם : ${props.name}`}
         </Typography>
-        <Typography className={styles.bottomText}>
-          סופר : {props.author}
-        </Typography>
+        {props.author ? (
+          <Typography className={styles.bottomText}>
+            סופר : {props.author}
+          </Typography>
+        ) : (
+          <div></div>
+        )}
       </Box>
-      {userIsLogged ? (
+      {props.userIsLogged ? (
         <Box className={styles.buttons}>
           <Box>
-            {isFavorite ? (
+            {props.isFavorite ? (
               <button
                 className={styles.favoriteButton}
                 onClick={() => {
-                  props.onFavoriteChange("");
+                  props.onFavoriteChange?.("");
                 }}
               ></button>
             ) : (
               <button
                 className={styles.notFavoriteButton}
                 onClick={() => {
-                  props.onFavoriteChange(props.id);
+                  props.onFavoriteChange?.(props.id);
                 }}
               ></button>
             )}

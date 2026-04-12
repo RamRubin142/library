@@ -5,10 +5,12 @@ import { UserControl } from "./pages/users/UserSection/UserSection";
 import { BookControl } from "./pages/books/BookSection/BookSection";
 import { AuthorControl } from "./pages/authors/AuthorSection/AuthorSection";
 export const App = () => {
+
   const PrivateRoutes = () => {
-    let auth = localStorage.getItem("loggedUser") != "";
+    const auth = localStorage.getItem("loggedUser") != "";
     return auth ? <Outlet /> : <Navigate to="/login" />;
   };
+
   return (
     <div>
       <Routes>

@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
-import { Book } from "../Book/Book";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { selectBook } from "../../../redux/bookSlice";
+import { selectBook, setBookIsEdited } from "../../../redux/bookSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store";
@@ -11,11 +10,18 @@ import {
   deleteBookById,
   updateBookNameById,
 } from "../../../api/books.api";
+import { SelectionSectionCard } from "../../../components/SelectionSectionCard/SelectionSectionCard";
 export const ManyBooksControl = () => {
   const dispatch = useDispatch();
 
   const selectedBookId = useSelector(
-    (state: RootState) => state.book.selectedBookId
+    (state: RootState) => state.book.selectedBookId,
+  );
+  const editedBookId = useSelector(
+    (state: RootState) => state.book.editedBookId,
+  );
+  const editedBookText = useSelector(
+    (state: RootState) => state.book.editedBookText,
   );
 
   const { data: books = [] } = useQuery<BookInterface[]>({
@@ -52,6 +58,15 @@ export const ManyBooksControl = () => {
     },
   });
 
+  const editButtonClicked = (bookId : string, bookText : string ) =>
+  {
+    dispatch(setBookIsEdited({bookId, bookText} ))
+  }
+
+  const editTextChanged = (bookId : string, bookText : string) => {
+    dispatch(setBookIsEdited({bookId, bookText} ))
+  }
+
   return (
     <Box
       sx={{
@@ -63,7 +78,12 @@ export const ManyBooksControl = () => {
       }}
     >
       {books.map((book) => (
-        <Book
+        <SelectionSectionCard
+          isSelected={selectedBookId == book._id}
+          isCurrentlyEdited={editedBookId == book._id}
+          currentlyEditedText={editedBookText}
+          onEditButtonChange={editButtonClicked}
+          onEditTextChange={editTextChanged}
           key={book._id}
           id={book._id}
           serialId={book.serialId}

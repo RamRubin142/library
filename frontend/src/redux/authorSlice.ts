@@ -29,6 +29,6 @@ export const authorSlice = createSlice({
   },
 });
 
-export const { selectAuthor } = authorSlice.actions;
+export const { selectAuthor, setAuthorIsEdited } = authorSlice.actions;
 
 export default authorSlice.reducer;

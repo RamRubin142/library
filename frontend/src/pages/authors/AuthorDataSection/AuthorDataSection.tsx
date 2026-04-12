@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
-import { Book } from "../Book/Book";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store";
 import styles from "./AuthorDataSection.module.css";
 import type { AuthorInterface } from "../../../models/authors/AuthorInterface";
 import { getAuthorById } from "../../../api/authors.api";
+import { DataSectionCard } from "../../../components/DataSectionCard/DataSectionCard";
 export const OneAuthorControl = () => {
   const selectedAuthorId = useSelector(
     (state: RootState) => state.author.selectedAuthorId
@@ -55,7 +55,7 @@ export const OneAuthorControl = () => {
         </Box>
         <Box className={styles.booksArea}>
           {author.books.map((book) => (
-            <Book
+            <DataSectionCard
               key={book._id}
               id={book.serialId}
               name={book.name}

@@ -31,6 +31,6 @@ export const UserSlice = createSlice({
   },
 );
 
-export const { selectUser } = UserSlice.actions;
+export const { selectUser, setUserIsEdited } = UserSlice.actions;
 
 export default UserSlice.reducer;

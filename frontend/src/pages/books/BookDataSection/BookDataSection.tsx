@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import { User } from "../User/User";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -7,6 +6,7 @@ import { getBookById } from "../../../api/books.api";
 import { deleteBooksFromUser } from "../../../api/users.api";
 import styles from "./BookDataSection.module.css";
 import type { BookInterface } from "../../../models/books/BookInterface";
+import { DataSectionCard } from "../../../components/DataSectionCard/DataSectionCard";
 export const OneBookControl = () => {
   const selectedBookId = useSelector(
     (state: RootState) => state.book.selectedBookId
@@ -68,7 +68,7 @@ export const OneBookControl = () => {
       </Box>
       <Box className={styles.booksArea}>
         {book.readers.map((reader) => (
-          <User
+          <DataSectionCard
             key={reader._id}
             id={reader._id}
             name={reader.name}

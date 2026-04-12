@@ -1,5 +1,4 @@
 import { Box, Button, Dialog, DialogTitle } from "@mui/material";
-import { Book } from "../Book/Book";
 import styles from "./UserDataSection.module.css";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store";
@@ -14,6 +13,7 @@ import {
   addBooksToUser,
 } from "../../../api/users.api";
 import { getBooks } from "../../../api/books.api";
+import { DataSectionCard } from "../../../components/DataSectionCard/DataSectionCard";
 export const OneUserControl = () => {
   const loggedUser = localStorage.getItem("loggedUser");
   const selectedUserId = useSelector(
@@ -154,7 +154,8 @@ export const OneUserControl = () => {
       </Box>
       <Box className={styles.booksArea}>
         {user.books.map((book) => (
-          <Book
+          <DataSectionCard
+            userIsLogged={loggedUser == user._id}
             key={book._id}
             id={book._id}
             serialId={book.serialId}
