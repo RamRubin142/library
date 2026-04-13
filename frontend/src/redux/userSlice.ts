@@ -2,26 +2,26 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
   selectedUserId: string | null;
-  editedUserId: string;
-  editedUserText: string;
+  editedUserId: string | null;
+  editedUserText: string | null;
 }
 
 const initialState: UserState = {
-  selectedUserId: "",
-  editedUserId: "",
-  editedUserText: "",
+  selectedUserId: null,
+  editedUserId: null,
+  editedUserText: null,
 };
 
 export const UserSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    selectUser: (state, action: PayloadAction<string>) => {
+    selectUser: (state, action: PayloadAction<string | null>) => {
       state.selectedUserId = action.payload;
     },    
     setUserIsEdited: (
       state,
-      action: PayloadAction<{ userId: string; userText: string }>
+      action: PayloadAction<{ userId: string | null; userText: string | null }>
     ) => {
       state.editedUserId = action.payload.userId;
       state.editedUserText = action.payload.userText;

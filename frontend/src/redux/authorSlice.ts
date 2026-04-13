@@ -2,26 +2,26 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthorState {
   selectedAuthorId: string | null;
-  editedAuthorId: string;
-  editedAuthorText: string;
+  editedAuthorId: string | null;
+  editedAuthorText: string | null;
 }
 
 const initialState: AuthorState = {
-  selectedAuthorId: "",
-  editedAuthorId: "",
-  editedAuthorText: "",
+  selectedAuthorId: null,
+  editedAuthorId: null,
+  editedAuthorText: null,
 };
 
 export const authorSlice = createSlice({
   name: "author",
   initialState,
   reducers: {
-    selectAuthor: (state, action: PayloadAction<string>) => {
+    selectAuthor: (state, action: PayloadAction<string | null>) => {
       state.selectedAuthorId = action.payload;
     },
     setAuthorIsEdited: (
       state,
-      action: PayloadAction<{ authorId: string; authorText: string }>
+      action: PayloadAction<{ authorId: string | null; authorText: string | null}>
     ) => {
       state.editedAuthorId = action.payload.authorId;
       state.editedAuthorText = action.payload.authorText;

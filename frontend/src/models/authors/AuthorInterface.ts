@@ -1,4 +1,4 @@
-import { type BookInterfaceForMinimalDisplay } from "../books/dto/BookInterfaceMinimalDisplay.dto";
+import { type BookInterfaceForMinimalDisplay } from "@models/books/dto/BookInterfaceMinimalDisplay.dto";
 export interface AuthorInterface {
   _id: string;
   name: string;

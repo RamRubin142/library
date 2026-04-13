@@ -12,10 +12,8 @@ import {
   updateUserNameById,
 } from "../../../api/users.api";
 import { SelectionSectionCard } from "../../../components/SelectionSectionCard/SelectionSectionCard";
+import { logUserOut } from "../../../redux/loggedUserSlice";
 export const ManyUsersControl = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const editedUserId = useSelector(
     (state: RootState) => state.user.editedUserId,
   );
@@ -26,13 +24,17 @@ export const ManyUsersControl = () => {
   const selectedUserId = useSelector(
     (state: RootState) => state.user.selectedUserId,
   );
-  const loggedUserId = localStorage.getItem("loggedUser");
+  const loggedUserId = useSelector(
+    (state: RootState) => state.loggedUser.loggedUserId,
+  );
 
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],
     queryFn: () => getUsers(),
   });
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
@@ -42,10 +44,10 @@ export const ManyUsersControl = () => {
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       if (selectedUserId === variables.userId) {
-        dispatch(selectUser(""));
+        dispatch(selectUser(null));
       }
       if (variables.userId == loggedUserId) {
-        localStorage.setItem("loggedUser", "");
+        dispatch(logUserOut());
         navigate("/login");
       }
     },
@@ -61,11 +63,11 @@ export const ManyUsersControl = () => {
     },
   });
 
-  const editButtonClicked = (userId: string, userText: string) => {
+  const editButtonClicked = (userId: string | null, userText: string | null) => {
     dispatch(setUserIsEdited({ userId, userText }));
   };
 
-  const editTextChanged = (userId: string, userText: string) => {
+  const editTextChanged = (userId: string | null, userText: string | null) => {
     dispatch(setUserIsEdited({ userId, userText }));
   };
 

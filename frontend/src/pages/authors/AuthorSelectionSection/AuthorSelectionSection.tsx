@@ -13,7 +13,6 @@ import {
   updateAuthorNameById,
 } from "../../../api/authors.api";
 export const ManyAuthorsControl = () => {
-  const dispatch = useDispatch();
   const editedAuthorId = useSelector(
     (state: RootState) => state.author.editedAuthorId,
   );
@@ -29,6 +28,7 @@ export const ManyAuthorsControl = () => {
     queryKey: ["authors"],
     queryFn: () => getAuthors(),
   });
+  const dispatch = useDispatch();
 
   const queryClient = useQueryClient();
 
@@ -37,7 +37,7 @@ export const ManyAuthorsControl = () => {
       return deleteAuthorById(variables.authorId);
     },
     onSuccess: (_data, variables) => {
-      dispatch(selectBook(""));
+      dispatch(selectBook(null));
       queryClient.invalidateQueries({ queryKey: ["favBook"] });
       queryClient.invalidateQueries({ queryKey: ["user"] });
       queryClient.invalidateQueries({ queryKey: ["book"] });
@@ -46,7 +46,7 @@ export const ManyAuthorsControl = () => {
         queryKey: ["author", variables.authorId],
       });
       if (selectedAuthorId === variables.authorId) {
-        dispatch(selectAuthor(""));
+        dispatch(selectAuthor(null));
       }
     },
   });
@@ -63,11 +63,17 @@ export const ManyAuthorsControl = () => {
     },
   });
 
-  const editButtonClicked = (authorId: string, authorText: string) => {
+  const editButtonClicked = (
+    authorId: string | null,
+    authorText: string | null,
+  ) => {
     dispatch(setAuthorIsEdited({ authorId, authorText }));
   };
 
-  const editTextChanged = (authorId: string, authorText: string) => {
+  const editTextChanged = (
+    authorId: string | null,
+    authorText: string | null,
+  ) => {
     dispatch(setAuthorIsEdited({ authorId, authorText }));
   };
 

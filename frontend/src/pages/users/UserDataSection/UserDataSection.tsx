@@ -15,12 +15,15 @@ import {
 import { getBooks } from "../../../api/books.api";
 import { DataSectionCard } from "../../../components/DataSectionCard/DataSectionCard";
 export const OneUserControl = () => {
-  const loggedUser = localStorage.getItem("loggedUser");
+  const loggedUser = useSelector(
+    (state: RootState) => state.loggedUser.loggedUserId,
+  );
+
   const selectedUserId = useSelector(
-    (state: RootState) => state.user.selectedUserId
+    (state: RootState) => state.user.selectedUserId,
   );
   const selectedUserIsLogged = loggedUser == selectedUserId;
-  const queryClient = useQueryClient();
+
   const [addBookPopupIsOpen, setAddBookPopupIsOpen] = useState(false);
 
   const handleAddBookButton = () => {
@@ -73,6 +76,7 @@ export const OneUserControl = () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
+  const queryClient = useQueryClient();
 
   if (!user || !selectedUserId || Array.isArray(user)) {
     return (

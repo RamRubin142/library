@@ -9,12 +9,12 @@ type SelectionSectionCardProps = {
   serialId: string;
   isSelected: boolean;
   isCurrentlyEdited : boolean;
-  currentlyEditedText : string;
+  currentlyEditedText : string | null;
   onDelete: (id: string) => void;
   onUpdate: (id: string, newName: string) => void;
   onSelect: (id: string) => void;
-  onEditButtonChange: (id : string, text : string) => void;
-  onEditTextChange: (id : string, text : string) => void;
+  onEditButtonChange: (id : string | null, text : string | null) => void;
+  onEditTextChange: (id : string | null, text : string | null) => void;
 };
 
 export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
@@ -30,7 +30,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
       props.currentlyEditedText.trim() !== ""
     ) {
       props.onUpdate(props.id, props.currentlyEditedText);
-      props.onEditButtonChange("", "");
+      props.onEditButtonChange(null, null);
     }
   };
 

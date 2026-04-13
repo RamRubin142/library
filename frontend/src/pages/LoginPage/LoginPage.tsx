@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 import type { UserInterface } from "../../models/users/UserInterface";
 import { getUsers } from "../../api/users.api";
 import styles from "./LoginPage.module.css";
+import { useDispatch } from "react-redux";
+import { logUserIn } from "../../redux/loggedUserSlice";
 export const LoginPage = () => {
-  const navigate = useNavigate();
-
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],
     queryFn: () => getUsers(),
@@ -19,8 +19,11 @@ export const LoginPage = () => {
 
   const [selectedUser, selectUser] = React.useState("");
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleLogin = async () => {
-    localStorage.setItem("loggedUser", selectedUser);
+    dispatch(logUserIn(selectedUser));
     navigate("/home");
   };
 

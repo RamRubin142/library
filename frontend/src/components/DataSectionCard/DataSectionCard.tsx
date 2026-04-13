@@ -28,7 +28,7 @@ export const DataSectionCard = (props: DataSectionCardProps) => {
             סופר : {props.author}
           </Typography>
         ) : (
-          <div></div>
+          <></>
         )}
       </Box>
       {props.userIsLogged ? (

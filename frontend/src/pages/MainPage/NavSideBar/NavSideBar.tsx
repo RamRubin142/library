@@ -10,12 +10,12 @@ const buttonStyle = {
 const selectedButtonStyle = {
   backgroundColor: "blue",
   color: "white",
-  borderRadius : 0,
+  borderRadius: 0,
 };
 
 export const NavSideBar = () => {
   const navigate = useNavigate();
-  let location = useLocation();
+  const location = useLocation();
 
   return (
     <Box sx={{ border: 1, height: "85.6vh" }}>

@@ -42,7 +42,7 @@ export const ManyBooksControl = () => {
         queryKey: ["book", variables.bookId],
       });
       if (selectedBookId === variables.bookId) {
-        dispatch(selectBook(""));
+        dispatch(selectBook(null));
       }
     },
   });
@@ -58,12 +58,12 @@ export const ManyBooksControl = () => {
     },
   });
 
-  const editButtonClicked = (bookId : string, bookText : string ) =>
+  const editButtonClicked = (bookId : string | null, bookText : string | null ) =>
   {
     dispatch(setBookIsEdited({bookId, bookText} ))
   }
 
-  const editTextChanged = (bookId : string, bookText : string) => {
+  const editTextChanged = (bookId : string | null, bookText : string | null) => {
     dispatch(setBookIsEdited({bookId, bookText} ))
   }
 

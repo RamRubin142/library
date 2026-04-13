@@ -4,10 +4,14 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { UserControl } from "./pages/users/UserSection/UserSection";
 import { BookControl } from "./pages/books/BookSection/BookSection";
 import { AuthorControl } from "./pages/authors/AuthorSection/AuthorSection";
+import { useSelector } from "react-redux";
+import type { RootState } from "./redux/store";
 export const App = () => {
-
+  const loggedUserId = useSelector(
+    (state: RootState) => state.loggedUser.loggedUserId,
+  );
   const PrivateRoutes = () => {
-    const auth = localStorage.getItem("loggedUser") != "";
+    const auth = loggedUserId != null;
     return auth ? <Outlet /> : <Navigate to="/login" />;
   };
 
