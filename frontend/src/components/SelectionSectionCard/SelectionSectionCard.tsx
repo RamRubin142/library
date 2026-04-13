@@ -18,7 +18,8 @@ type SelectionSectionCardProps = {
 };
 
 export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
-  
+
+
   const handleDelete = async () => {
     props.onDelete(props.id);
   };
@@ -33,6 +34,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
       props.onEditButtonChange(null, null);
     }
   };
+
 
   return (
     <Box
@@ -69,7 +71,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
             סופר : {props.author}
           </Typography>
         ) : (
-          <div></div>
+          <></>
         )}
       </Box>
       <Box className={styles.buttons}>

@@ -16,6 +16,12 @@ export const DataSectionCard = (props: DataSectionCardProps) => {
   const handleDelete = async () => {
     props.onDelete?.(props.id);
   };
+  const setBookAsFavorite = async () => {
+    props.onFavoriteChange?.(props.id);
+  };
+  const unFavoriteBook = async () => {
+    props.onFavoriteChange?.("");
+  }
 
   return (
     <Box className={styles.bookContainer}>
@@ -38,14 +44,14 @@ export const DataSectionCard = (props: DataSectionCardProps) => {
               <button
                 className={styles.favoriteButton}
                 onClick={() => {
-                  props.onFavoriteChange?.("");
+                  unFavoriteBook();
                 }}
               ></button>
             ) : (
               <button
                 className={styles.notFavoriteButton}
                 onClick={() => {
-                  props.onFavoriteChange?.(props.id);
+                  setBookAsFavorite();
                 }}
               ></button>
             )}

@@ -51,17 +51,17 @@ export const OneBookControl = () => {
       <Box className={styles.topBar}>
         {book.readers.length > 0 ? (
           <Box className={styles.topBarText}>
-            הקוראים של{" "}
+            הקוראים של
             <Box className={styles.title}>
               <b>{book.name}</b>
-            </Box>{" "}
+            </Box>
           </Box>
         ) : (
           <Box className={styles.topBarText}>
-            ל{" "}
+            ל
             <Box className={styles.title}>
               <b>{book.name}</b>
-            </Box>{" "}
+            </Box>
             אין קוראים
           </Box>
         )}

@@ -40,14 +40,14 @@ export const OneAuthorControl = () => {
                 הספרים של
                 <Box className={styles.title}>
                   <b>{author.name}</b>
-                </Box>{" "}
+                </Box>
               </Box>
             ) : (
               <Box className={styles.topBarText}>
-                ל{" "}
+                ל
                 <Box className={styles.title}>
                   <b>{author.name}</b>
-                </Box>{" "}
+                </Box>
                 אין ספרים
               </Box>
             )}

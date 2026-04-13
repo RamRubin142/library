@@ -100,18 +100,18 @@ export const OneUserControl = () => {
         <Box>
           {user.books.length > 0 ? (
             <Box className={styles.topBarText}>
-              הספרים ש{" "}
+              הספרים ש
               <Box className={styles.title}>
                 <b>{user.name}</b>
-              </Box>{" "}
+              </Box>
               קרא:
             </Box>
           ) : (
             <Box className={styles.topBarText}>
-              ל{" "}
+              ל
               <Box className={styles.title}>
                 <b>{user.name}</b>
-              </Box>{" "}
+              </Box>
               אין ספרים שהוא קרא
             </Box>
           )}

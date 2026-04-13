@@ -45,7 +45,6 @@ export const TitleBar = () => {
           justifyContent: "space-between",
         }}
       >
-        {" "}
         <Box>
           <Typography
             color="black"
@@ -88,7 +87,6 @@ export const TitleBar = () => {
                 color="black"
                 className={styles.title}
               >
-                {" "}
                 אין לך ספר אהוב
               </Typography>
             )}
