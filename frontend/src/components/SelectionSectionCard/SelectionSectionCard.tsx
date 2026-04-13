@@ -8,18 +8,16 @@ type SelectionSectionCardProps = {
   author?: string;
   serialId: string;
   isSelected: boolean;
-  isCurrentlyEdited : boolean;
-  currentlyEditedText : string | null;
+  isCurrentlyEdited: boolean;
+  currentlyEditedText: string | null;
   onDelete: (id: string) => void;
   onUpdate: (id: string, newName: string) => void;
   onSelect: (id: string) => void;
-  onEditButtonChange: (id : string | null, text : string | null) => void;
-  onEditTextChange: (id : string | null, text : string | null) => void;
+  onEditButtonChange: (id: string | null, text: string | null) => void;
+  onEditTextChange: (id: string | null, text: string | null) => void;
 };
 
 export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
-
-
   const handleDelete = async () => {
     props.onDelete(props.id);
   };
@@ -35,13 +33,10 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
     }
   };
 
-
   return (
     <Box
       className={
-        (props.isSelected
-          ? styles.selectedBookContainer
-          : styles.bookContainer)
+        props.isSelected ? styles.selectedBookContainer : styles.bookContainer
       }
       onClick={() => props.onSelect(props.id)}
     >
@@ -78,7 +73,11 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
         <button
           className={styles.editButton}
           onClick={() => {
-            props.onEditButtonChange(props.id, props.name);
+            if (!props.isCurrentlyEdited) {
+              props.onEditButtonChange(props.id, props.name);
+            } else {
+              props.onEditButtonChange(null, null);
+            }
           }}
         >
           ערוך

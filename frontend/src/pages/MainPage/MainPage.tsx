@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import { NavSideBar } from "../NavSideBar/NavSideBar";
-import { TitleBar } from "../TitleBar/TitleBar";
+import { NavSideBar } from "./SubComponents/NavSideBar/NavSideBar";
+import { TitleBar } from "./SubComponents/TitleBar/TitleBar";
 import { Outlet } from "react-router-dom";
 export const MainPage = () => {
   return (
