@@ -42,7 +42,6 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
     >
       <Box className={styles.info}>
         <Box className={styles.name}>
-          <Box>{`מזהה : ${props.serialId}   שם : `}</Box>
           <Box>
             {props.isCurrentlyEdited ? (
               <input
@@ -55,13 +54,11 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
                 onKeyDown={editTaskHandler}
               />
             ) : (
-              <Typography className={styles.bottomText}>
-                {props.name}
-              </Typography>
+              <Box>{`מזהה : ${props.serialId}   שם :  ${props.name}`}</Box>
             )}
           </Box>
         </Box>
-        {props.author ? (
+        {props.author && !props.isCurrentlyEdited? (
           <Typography className={styles.bottomText}>
             סופר : {props.author}
           </Typography>
