@@ -3,16 +3,16 @@ import { useQuery } from "@tanstack/react-query";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
-import type { BookInterface } from "../../../models/books/BookInterface";
-import type { UserInterface } from "../../../models/users/UserInterface";
-import { getUserById } from "../../../api/users.api";
-import { getBookById } from "../../../api/books.api";
+import type { BookInterface } from "@models/books/BookInterface";
+import type { UserInterface } from "@models/users/UserInterface";
+import { getUserById } from "@api/users.api";
+import { getBookById } from "@api/books.api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styles from "./TitleBar.module.css";
-import { logUserOut } from "../../../redux/loggedUserSlice";
+import { logUserOut } from "@redux/loggedUserSlice";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/store";
+import type { RootState } from "@redux/store";
 export const TitleBar = () => {
   const currentUserId = useSelector(
     (state: RootState) => state.loggedUser.loggedUserId,

@@ -1,14 +1,14 @@
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/store";
+import type { RootState } from "@redux/store";
 import styles from "./AuthorDataSection.module.css";
-import type { AuthorInterface } from "../../../models/authors/AuthorInterface";
-import { getAuthorById } from "../../../api/authors.api";
-import { DataSectionCard } from "../../../components/DataSectionCard/DataSectionCard";
+import type { AuthorInterface } from "@models/authors/AuthorInterface";
+import { getAuthorById } from "@api/authors.api";
+import { DataSectionCard } from "@components/DataSectionCard/DataSectionCard";
 export const OneAuthorControl = () => {
   const selectedAuthorId = useSelector(
-    (state: RootState) => state.author.selectedAuthorId
+    (state: RootState) => state.author.selectedAuthorId,
   );
 
   const { data: author } = useQuery<AuthorInterface>({
@@ -37,7 +37,7 @@ export const OneAuthorControl = () => {
           <Box>
             {author.books.length > 0 ? (
               <Box className={styles.topBarText}>
-                הספרים של{" "}
+                הספרים של
                 <Box className={styles.title}>
                   <b>{author.name}</b>
                 </Box>{" "}

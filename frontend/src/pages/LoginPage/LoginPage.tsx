@@ -6,11 +6,11 @@ import { Box, Typography, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import type { UserInterface } from "../../models/users/UserInterface";
-import { getUsers } from "../../api/users.api";
+import type { UserInterface } from "@models/users/UserInterface";
+import { getUsers } from "@api/users.api";
 import styles from "./LoginPage.module.css";
 import { useDispatch } from "react-redux";
-import { logUserIn } from "../../redux/loggedUserSlice";
+import { logUserIn } from "@redux/loggedUserSlice";
 export const LoginPage = () => {
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],

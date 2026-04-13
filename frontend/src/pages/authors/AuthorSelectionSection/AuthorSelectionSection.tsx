@@ -1,17 +1,17 @@
 import { Box } from "@mui/material";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { selectAuthor, setAuthorIsEdited } from "../../../redux/authorSlice";
+import { selectAuthor, setAuthorIsEdited } from "@redux/authorSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/store";
-import { selectBook } from "../../../redux/bookSlice";
-import { type AuthorInterface } from "../../../models/authors/AuthorInterface";
-import { SelectionSectionCard } from "../../../components/SelectionSectionCard/SelectionSectionCard";
+import type { RootState } from "@redux/store";
+import { selectBook } from "@redux/bookSlice";
+import { type AuthorInterface } from "@models/authors/AuthorInterface";
+import { SelectionSectionCard } from "@components/SelectionSectionCard/SelectionSectionCard";
 import {
   getAuthors,
   deleteAuthorById,
   updateAuthorNameById,
-} from "../../../api/authors.api";
+} from "@api/authors.api";
 export const ManyAuthorsControl = () => {
   const editedAuthorId = useSelector(
     (state: RootState) => state.author.editedAuthorId,

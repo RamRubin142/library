@@ -1,16 +1,12 @@
 import { Box } from "@mui/material";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { selectBook, setBookIsEdited } from "../../../redux/bookSlice";
+import { selectBook, setBookIsEdited } from "@redux/bookSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/store";
-import type { BookInterface } from "../../../models/books/BookInterface";
-import {
-  getBooks,
-  deleteBookById,
-  updateBookNameById,
-} from "../../../api/books.api";
-import { SelectionSectionCard } from "../../../components/SelectionSectionCard/SelectionSectionCard";
+import type { RootState } from "@redux/store";
+import type { BookInterface } from "@models/books/BookInterface";
+import { getBooks, deleteBookById, updateBookNameById } from "@api/books.api";
+import { SelectionSectionCard } from "@components/SelectionSectionCard/SelectionSectionCard";
 export const ManyBooksControl = () => {
   const dispatch = useDispatch();
 
@@ -58,14 +54,16 @@ export const ManyBooksControl = () => {
     },
   });
 
-  const editButtonClicked = (bookId : string | null, bookText : string | null ) =>
-  {
-    dispatch(setBookIsEdited({bookId, bookText} ))
-  }
+  const editButtonClicked = (
+    bookId: string | null,
+    bookText: string | null,
+  ) => {
+    dispatch(setBookIsEdited({ bookId, bookText }));
+  };
 
-  const editTextChanged = (bookId : string | null, bookText : string | null) => {
-    dispatch(setBookIsEdited({bookId, bookText} ))
-  }
+  const editTextChanged = (bookId: string | null, bookText: string | null) => {
+    dispatch(setBookIsEdited({ bookId, bookText }));
+  };
 
   return (
     <Box

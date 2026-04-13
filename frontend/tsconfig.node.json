@@ -19,7 +19,16 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": "src",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@pages/*": ["pages/*"],
+      "@components/*": ["components/*"],
+      "@models/*": ["models/*"],
+      "@redux/*": ["redux/*"],
+
+    }, 
   },
   "include": ["vite.config.ts"]
 }

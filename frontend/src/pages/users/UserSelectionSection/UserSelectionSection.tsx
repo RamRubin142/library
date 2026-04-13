@@ -1,18 +1,14 @@
 import { Box } from "@mui/material";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { selectUser, setUserIsEdited } from "../../../redux/userSlice";
+import { selectUser, setUserIsEdited } from "@redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/store";
-import type { UserInterface } from "../../../models/users/UserInterface";
+import type { RootState } from "@redux/store";
+import type { UserInterface } from "@models/users/UserInterface";
 import { useNavigate } from "react-router-dom";
-import {
-  getUsers,
-  deleteUserById,
-  updateUserNameById,
-} from "../../../api/users.api";
-import { SelectionSectionCard } from "../../../components/SelectionSectionCard/SelectionSectionCard";
-import { logUserOut } from "../../../redux/loggedUserSlice";
+import { getUsers, deleteUserById, updateUserNameById } from "@api/users.api";
+import { SelectionSectionCard } from "@components/SelectionSectionCard/SelectionSectionCard";
+import { logUserOut } from "@redux/loggedUserSlice";
 export const ManyUsersControl = () => {
   const editedUserId = useSelector(
     (state: RootState) => state.user.editedUserId,
@@ -63,7 +59,10 @@ export const ManyUsersControl = () => {
     },
   });
 
-  const editButtonClicked = (userId: string | null, userText: string | null) => {
+  const editButtonClicked = (
+    userId: string | null,
+    userText: string | null,
+  ) => {
     dispatch(setUserIsEdited({ userId, userText }));
   };
 

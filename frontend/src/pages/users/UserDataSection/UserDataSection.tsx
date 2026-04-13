@@ -1,19 +1,19 @@
 import { Box, Button, Dialog, DialogTitle } from "@mui/material";
 import styles from "./UserDataSection.module.css";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/store";
+import type { RootState } from "@redux/store";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import type { UserInterface } from "../../../models/users/UserInterface";
-import type { BookInterface } from "../../../models/books/BookInterface";
+import type { UserInterface } from "@models/users/UserInterface";
+import type { BookInterface } from "@models/books/BookInterface";
 import {
   getUserById,
   favoriteBooksOfUser,
   deleteBooksFromUser,
   addBooksToUser,
-} from "../../../api/users.api";
-import { getBooks } from "../../../api/books.api";
-import { DataSectionCard } from "../../../components/DataSectionCard/DataSectionCard";
+} from "@api/users.api";
+import { getBooks } from "@api/books.api";
+import { DataSectionCard } from "@components/DataSectionCard/DataSectionCard";
 export const OneUserControl = () => {
   const loggedUser = useSelector(
     (state: RootState) => state.loggedUser.loggedUserId,
