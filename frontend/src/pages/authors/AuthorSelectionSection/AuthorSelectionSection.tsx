@@ -12,6 +12,7 @@ import {
   deleteAuthorById,
   updateAuthorNameById,
 } from "@api/authors.api";
+import styles from "./AuthorSelectionSection.module.css";
 export const ManyAuthorsControl = () => {
   const editedAuthorId = useSelector(
     (state: RootState) => state.author.editedAuthorId,
@@ -79,13 +80,7 @@ export const ManyAuthorsControl = () => {
 
   return (
     <Box
-      sx={{
-        border: 1,
-        height: "80vh",
-        padding: "20px",
-        width: "50%",
-        overflowY: "scroll",
-      }}
+      className={styles.selectionSection}
     >
       {authors.map((author) => (
         <SelectionSectionCard

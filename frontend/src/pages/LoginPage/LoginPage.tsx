@@ -2,7 +2,7 @@ import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import { getUsers } from "@api/users.api";
 import styles from "./LoginPage.module.css";
 import { useDispatch } from "react-redux";
 import { logUserIn } from "@redux/loggedUserSlice";
+import { TitleComponent } from "@components/TitleComponent/TitleComponent";
 export const LoginPage = () => {
   const { data: users = [] } = useQuery<UserInterface[]>({
     queryKey: ["users"],
@@ -28,16 +29,14 @@ export const LoginPage = () => {
   };
 
   return (
-    <Box
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <Typography sx={{ fontSize: "100px", marginTop: "100px" }}>
-        הספריה
-      </Typography>
-      <FormControl sx={{ width: "400px" }} size="medium">
+    <Box className={styles.container}>
+      <TitleComponent size={"100pt"} color={"black"} />
+
+      <FormControl className={styles.formControl} size="medium">
         <InputLabel id="demo-select-small-label">
           בחר משתמש להתחברות ...
         </InputLabel>
+
         <Select
           labelId="demo-select-small-label"
           id="demo-select-small"
@@ -48,22 +47,14 @@ export const LoginPage = () => {
           }}
         >
           {users.map((user) => (
-            <MenuItem value={user._id} className={styles.text}>
+            <MenuItem key={user._id} value={user._id} className={styles.text}>
               {user.name}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-      <Button
-        sx={{
-          backgroundColor: "green",
-          color: "white",
-          borderRadius: 0,
-          width: "150px",
-          marginTop: "50px",
-        }}
-        onClick={handleLogin}
-      >
+
+      <Button className={styles.loginButton} onClick={handleLogin}>
         התחבר
       </Button>
     </Box>

@@ -1,16 +1,15 @@
-
 .addButton {
-    background-color : blueviolet;
-    color :white;
-    width : 100px;
-    height : 30px;
+  background-color: blueviolet;
+  color: white;
+  width: 100px;
+  height: 30px;
 }
 
 .topBar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 .topBarText {
@@ -24,14 +23,22 @@
   max-width: 200px;
   height: 1.2em;
   white-space: nowrap;
-  margin-right :4px !important;
+  margin-right: 4px !important;
   margin-left: 4px !important;
 }
 
-
 .booksArea {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    width :90%;
+  width: 90%;
+}
+
+.dataSection {  
+  background-color: beige;
+  border: 3px solid brown;
+  height: 80v;
+  padding: 20px;
+  width: 50%;
+  overflow: auto;
 }

@@ -6,6 +6,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import type { UserInterface } from "@models/users/UserInterface";
 import type { BookInterface } from "@models/books/BookInterface";
+import PsychologyIcon from "@mui/icons-material/Psychology";
 import {
   getUserById,
   favoriteBooksOfUser,
@@ -87,15 +88,7 @@ export const OneUserControl = () => {
   }
 
   return (
-    <Box
-      sx={{
-        border: 1,
-        height: "80vh",
-        padding: "20px",
-        width: "50%",
-        overflowY: "scroll",
-      }}
-    >
+    <Box className={styles.dataSection}>
       <Box className={styles.topBar}>
         <Box>
           {user.books.length > 0 ? (
@@ -122,34 +115,44 @@ export const OneUserControl = () => {
               הוסף ספר
             </button>
             <Dialog open={addBookPopupIsOpen}>
-              {books &&
-              books.filter((book) => !listOfBookIds?.includes(book?._id))
-                ?.length > 0 ? (
-                <Box
-                  sx={{
-                    p: 1,
-                    bgcolor: "background.paper",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <DialogTitle>בחר ספר</DialogTitle>
-                  {books
-                    ?.filter((book) => !listOfBookIds?.includes(book._id))
-                    .map((book) => (
-                      <Box
-                        className={styles.addBookComponent}
-                        onClick={() => handleAddBook(book._id)}
-                      >
-                        {book.name}
-                      </Box>
-                    ))}
-                </Box>
-              ) : (
-                <DialogTitle>אין בספריה ספרים שעוד לא קראת</DialogTitle>
-              )}
+              <Box className={styles.dialog}>
+                {books &&
+                books.filter((book) => !listOfBookIds?.includes(book?._id))
+                  ?.length > 0 ? (
+                  <Box
+                    sx={{
+                      p: 1,
+                      bgcolor: "background.paper",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <DialogTitle>בחר ספר</DialogTitle>
+                    {books
+                      ?.filter((book) => !listOfBookIds?.includes(book._id))
+                      .map((book) => (
+                        <Box
+                          className={styles.addBookComponent}
+                          onClick={() => handleAddBook(book._id)}
+                        >
+                          {book.name}
+                        </Box>
+                      ))}
+                  </Box>
+                ) : (
+                  <>
+                    <DialogTitle>אין בספריה ספרים שעוד לא קראת</DialogTitle>
+                    <PsychologyIcon className={styles.icon}/>
+                  </>
+                )}
 
-              <Button onClick={() => setAddBookPopupIsOpen(false)}>סגור</Button>
+                <Button
+                  className={styles.closeButton}
+                  onClick={() => setAddBookPopupIsOpen(false)}
+                >
+                  סגור
+                </Button>
+              </Box>
             </Dialog>
           </Box>
         ) : (

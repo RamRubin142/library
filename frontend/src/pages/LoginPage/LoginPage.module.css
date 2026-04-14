@@ -6,3 +6,83 @@
   height: 1.2em !important;
   white-space: nowrap !important;
 }
+
+
+.container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  background-image: url(https://static.vecteezy.com/system/resources/thumbnails/075/037/973/small/open-book-with-yellow-bokeh-lights-background-on-a-wooden-table-soft-focus-free-photo.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 96vh;
+}
+
+.formControl {
+  width: 400px !important;
+  margin-top: 100px;
+}
+
+.loginButton {
+  background: linear-gradient(145deg, #28a745, #1e7e34) !important;
+  color: white !important;
+  width: 160px !important;
+  height: 40px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 14pt !important;
+  font-weight: 600 !important;
+  margin-top: 50px !important;
+  cursor: pointer !important;
+
+  position: relative !important;
+  overflow: hidden !important;
+
+  /* 3D depth */
+  box-shadow:
+    0 4px 0 #145c2c,
+    0 6px 14px rgba(0, 0, 0, 0.25) !important;
+
+  transition: all 0.15s ease !important;
+}
+
+/* hover = lift + glow */
+.loginButton:hover {
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 6px 0 #145c2c,
+    0 10px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* click = pressed */
+.loginButton:active {
+  transform: translateY(4px) !important;
+  box-shadow:
+    0 1px 0 #145c2c,
+    0 3px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* subtle shine effect */
+.loginButton::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -75% !important;
+  width: 50% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  ) !important;
+  transform: skewX(-20deg) !important;
+}
+
+/* shine animation on hover */
+.loginButton:hover::after {
+  left: 120% !important;
+  transition: left 0.5s ease !important;
+}

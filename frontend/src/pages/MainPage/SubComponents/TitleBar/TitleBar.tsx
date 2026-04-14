@@ -1,4 +1,4 @@
-import { Box, Toolbar, Typography, Button } from "@mui/material";
+import { Box, Toolbar, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -13,6 +13,8 @@ import styles from "./TitleBar.module.css";
 import { logUserOut } from "@redux/loggedUserSlice";
 import { useSelector } from "react-redux";
 import type { RootState } from "@redux/store";
+import { TitleComponent } from "@components/TitleComponent/TitleComponent";
+import LogoutIcon from "@mui/icons-material/Logout";
 export const TitleBar = () => {
   const currentUserId = useSelector(
     (state: RootState) => state.loggedUser.loggedUserId,
@@ -36,87 +38,53 @@ export const TitleBar = () => {
   };
 
   return (
-    <Box sx={{ border: 1 }}>
-      <Toolbar
-        sx={{
-          bgcolor: "white",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Box>
-          <Typography
-            color="black"
-            variant="h4"
-            component="div"
-            sx={{ flexGrow: 2 }}
-          >
-            הספריה
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
-          <Box sx={{ flexDirection: "column", flexGrow: 1 }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                fontSize: "14pt",
-                fontFamily: "Arial, sans-serif",
-              }}
-            >
-              שלום<Box className={styles.title}>{user?.name}</Box>!
+    <Box className={styles.outerBox}>
+      <Toolbar className={styles.toolbar}>
+        <TitleComponent size={"40pt"} color={"black"} />
+        <Box className={styles.rightContainer}>
+          <Box className={styles.userSection}>
+            <Box className={styles.userRow}>
+              שלום
+              <Box className={styles.title}>{user?.name}</Box>!
             </Box>
+
             {favBook?._id ? (
-              <Typography
-                sx={{ fontSize: "10pt" }}
-                color="black"
-                className={styles.title}
-              >
+              <Box className={`${styles.favText} ${styles.title}`}>
                 הספר האהוב עליך הוא {favBook?.name}
-              </Typography>
+              </Box>
             ) : (
-              <Typography
-                sx={{ fontSize: "10pt" }}
-                color="black"
-                className={styles.title}
-              >
+              <Box className={`${styles.favText} ${styles.title}`}>
                 אין לך ספר אהוב
-              </Typography>
+              </Box>
             )}
           </Box>
+
           <Button
-            sx={{
-              bgcolor: "orange",
-              color: "white",
-              width: "100px",
-              borderRadius: "0",
-              fontSize: "13pt",
-              marginLeft: "80px",
-            }}
+            className={styles.logoutButton}
             onClick={() => {
               setLogoutPopupOpen(true);
             }}
           >
             התנתק
           </Button>
-          <Dialog open={logoutPopupOpen}>
+
+          <Dialog open={logoutPopupOpen}> 
             <DialogTitle>האם אתה בטוח שברצונך להתנתק ?</DialogTitle>
-            <Box>
-              <Button onClick={handleLogout}>כן</Button>
-              <Button
-                onClick={() => {
-                  setLogoutPopupOpen(false);
-                }}
-              >
-                לא
-              </Button>
+            <Box className={styles.logoutPopup}>
+              <LogoutIcon />
+              <Box className={styles.dialogButtons}>
+                <Button className={styles.yesButton} onClick={handleLogout}>
+                  כן
+                </Button>
+                <Button
+                  onClick={() => {
+                    setLogoutPopupOpen(false);
+                  }}
+                  className={styles.noButton}
+                >
+                  לא
+                </Button>
+              </Box>
             </Box>
           </Dialog>
         </Box>

@@ -7,6 +7,7 @@ import type { RootState } from "@redux/store";
 import type { BookInterface } from "@models/books/BookInterface";
 import { getBooks, deleteBookById, updateBookNameById } from "@api/books.api";
 import { SelectionSectionCard } from "@components/SelectionSectionCard/SelectionSectionCard";
+import styles from "./BookSelectionSection.module.css";
 export const ManyBooksControl = () => {
   const dispatch = useDispatch();
 
@@ -67,13 +68,7 @@ export const ManyBooksControl = () => {
 
   return (
     <Box
-      sx={{
-        border: 1,
-        height: "80vh",
-        padding: "20px",
-        width: "50%",
-        overflowY: "scroll",
-      }}
+      className={styles.selectionSection}
     >
       {books.map((book) => (
         <SelectionSectionCard

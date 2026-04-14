@@ -1,30 +1,21 @@
 import Button from "@mui/material/Button";
 import { Box, ButtonGroup } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
-const buttonStyle = {
-  backgroundColor: "white",
-  color: "black",
-  borderRadius: 0,
-};
+import styles from "./NavSideBar.module.css";
 
-const selectedButtonStyle = {
-  backgroundColor: "blue",
-  color: "white",
-  borderRadius: 0,
-};
 
 export const NavSideBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
-    <Box sx={{ border: 1, height: "85.6vh" }}>
+    <Box className={styles.navBar}>
       <ButtonGroup orientation="vertical" aria-label="Vertical button group">
         <Button
-          sx={
+          className={
             location.pathname == "/home/users"
-              ? selectedButtonStyle
-              : buttonStyle
+              ? styles.selectedButtonStyle
+              : styles.buttonStyle
           }
           onClick={() => {
             navigate("/home/users");
@@ -33,10 +24,10 @@ export const NavSideBar = () => {
           ניהול משתמשים
         </Button>
         <Button
-          sx={
+          className={
             location.pathname == "/home/books"
-              ? selectedButtonStyle
-              : buttonStyle
+              ? styles.selectedButtonStyle
+              : styles.buttonStyle
           }
           onClick={() => {
             navigate("/home/books");
@@ -45,10 +36,10 @@ export const NavSideBar = () => {
           ניהול ספרים
         </Button>
         <Button
-          sx={
+          className={
             location.pathname == "/home/authors"
-              ? selectedButtonStyle
-              : buttonStyle
+              ? styles.selectedButtonStyle
+              : styles.buttonStyle
           }
           onClick={() => {
             navigate("/home/authors");

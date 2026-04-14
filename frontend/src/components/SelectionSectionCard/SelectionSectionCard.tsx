@@ -1,7 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import styles from "./SelectionSectionCard.module.css";
 import type { KeyboardEvent, ChangeEvent } from "react";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
 type SelectionSectionCardProps = {
   name: string;
   id: string;
@@ -40,7 +42,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
       }
       onClick={() => props.onSelect(props.id)}
     >
-      <Box className={styles.info}>
+      <Box className={styles.dataSection}>
         <Box className={styles.name}>
           <Box>
             {props.isCurrentlyEdited ? (
@@ -54,34 +56,37 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
                 onKeyDown={editTaskHandler}
               />
             ) : (
-              <Box>{`מזהה : ${props.serialId}   שם :  ${props.name}`}</Box>
+              <Box className={styles.text}>{`מזהה : ${props.serialId}   שם :  ${props.name}`}</Box>
             )}
           </Box>
         </Box>
-        {props.author && !props.isCurrentlyEdited? (
-          <Typography className={styles.bottomText}>
-            סופר : {props.author}
-          </Typography>
+        {props.author && !props.isCurrentlyEdited ? (
+          <Box className={styles.text}>{`סופר : ${props.author}`}</Box>
         ) : (
           <></>
         )}
       </Box>
       <Box className={styles.buttons}>
-        <button
-          className={styles.editButton}
-          onClick={() => {
-            if (!props.isCurrentlyEdited) {
-              props.onEditButtonChange(props.id, props.name);
-            } else {
-              props.onEditButtonChange(null, null);
-            }
-          }}
-        >
-          ערוך
-        </button>
-        <button className={styles.deleteButton} onClick={handleDelete}>
-          מחק
-        </button>
+        <Box className={styles.buttonContainer}>
+          {props.isCurrentlyEdited ? (
+            <CloseIcon
+              className={styles.editButton}
+              onClick={() => {
+                props.onEditButtonChange(null, null);
+              }}
+            />
+          ) : (
+            <EditIcon
+              className={styles.editButton}
+              onClick={() => {
+                props.onEditButtonChange(props.id, props.name);
+              }}
+            />
+          )}
+        </Box>
+        <Box className={styles.buttonContainer}>
+          <DeleteIcon className={styles.deleteButton} onClick={handleDelete} />
+        </Box>
       </Box>
     </Box>
   );

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { getUsers, deleteUserById, updateUserNameById } from "@api/users.api";
 import { SelectionSectionCard } from "@components/SelectionSectionCard/SelectionSectionCard";
 import { logUserOut } from "@redux/loggedUserSlice";
+import styles from "./UserSelectionSection.module.css";
 export const ManyUsersControl = () => {
   const editedUserId = useSelector(
     (state: RootState) => state.user.editedUserId,
@@ -72,13 +73,7 @@ export const ManyUsersControl = () => {
 
   return (
     <Box
-      sx={{
-        border: 1,
-        height: "80vh",
-        padding: "20px",
-        width: "50%",
-        overflowY: "scroll",
-      }}
+      className={styles.selectionSection}
     >
       {users.map((user) => (
         <SelectionSectionCard

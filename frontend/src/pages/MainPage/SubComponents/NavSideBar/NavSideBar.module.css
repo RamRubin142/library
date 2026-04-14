@@ -1,0 +1,16 @@
+.buttonStyle {
+  background-color: beige !important;
+  color: black !important;
+  border-radius: 0 !important;
+}
+
+.selectedButtonStyle {
+  background-color: rgb(183, 73, 73) !important;
+  color: white !important;
+  border-radius: 0 !important;
+}
+
+.navBar {
+    border : 3px solid brown;
+    height : 86.3vh;
+}

@@ -1,9 +1,37 @@
 .addButton {
-  background-color: blueviolet;
+  background: linear-gradient(145deg, #9b5cfb, #6f2bd9);
   color: white;
-  width: 100px;
-  height: 30px;
+  width: 110px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+
+  /* 3D effect */
+  box-shadow: 
+    0 4px 0 #4c1d95,        /* bottom "edge" */
+    0 6px 10px rgba(0, 0, 0, 0.2); /* soft shadow */
+
+  transition: all 0.1s ease;
 }
+
+/* hover = slightly lifted */
+.addButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 5px 0 #4c1d95,
+    0 8px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* click = pressed down */
+.addButton:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 1px 0 #4c1d95,
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 
 .topBar {
   display: flex;
@@ -47,4 +75,30 @@
   max-width: 300px !important;
   height: 1.2em !important;
   white-space: nowrap !important;
+}
+
+.dataSection {  
+  background-color: beige;
+  border: 3px solid brown;
+  height: 80v;
+  padding: 20px;
+  width: 50%;
+  overflow: auto;
+}
+
+.closeButton {
+  background-color : red !important;
+  color : white !important;
+  width : 30% !important;
+  
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  font-size: large;
 }

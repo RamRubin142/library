@@ -1,11 +1,12 @@
 import { LoginPage } from "./pages/LoginPage/LoginPage";
-import { MainPage } from "./pages/MainPage/MainPage/MainPage";
+import { MainPage } from "./pages/MainPage/MainPage";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { UserControl } from "./pages/users/UserSection/UserSection";
 import { BookControl } from "./pages/books/BookSection/BookSection";
 import { AuthorControl } from "./pages/authors/AuthorSection/AuthorSection";
 import { useSelector } from "react-redux";
 import type { RootState } from "./redux/store";
+import styles from "./App.module.css";
 export const App = () => {
   const loggedUserId = useSelector(
     (state: RootState) => state.loggedUser.loggedUserId,
@@ -16,7 +17,7 @@ export const App = () => {
   };
 
   return (
-    <div>
+    <div className={styles.font}>
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path="/home" element={<MainPage />}>

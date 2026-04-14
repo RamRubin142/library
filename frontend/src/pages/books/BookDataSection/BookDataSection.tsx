@@ -40,13 +40,7 @@ export const OneBookControl = () => {
 
   return (
     <Box
-      sx={{
-        border: 1,
-        height: "80vh",
-        padding: "20px",
-        width: "50%",
-        overflowY: "scroll",
-      }}
+      className={styles.dataSection}
     >
       <Box className={styles.topBar}>
         {book.readers.length > 0 ? (

@@ -1,5 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import styles from "./DataSectionCard.module.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
 type DataSectionCardProps = {
   name: string;
   id: string;
@@ -21,44 +24,47 @@ export const DataSectionCard = (props: DataSectionCardProps) => {
   };
   const unFavoriteBook = async () => {
     props.onFavoriteChange?.("");
-  }
+  };
 
   return (
     <Box className={styles.bookContainer}>
-      <Box className={styles.name}>
-        <Typography className={styles.topText}>
+      <Box className={styles.dataSection}>
+        <Box className={styles.text}>
           {`מזהה : ${props.serialId}    שם : ${props.name}`}
-        </Typography>
+        </Box>
         {props.author ? (
-          <Typography className={styles.bottomText}>
+          <Box className={styles.text}>
             סופר : {props.author}
-          </Typography>
+          </Box>
         ) : (
           <></>
         )}
       </Box>
       {props.userIsLogged ? (
         <Box className={styles.buttons}>
-          <Box>
+          <Box className={styles.buttonContainer}>
             {props.isFavorite ? (
-              <button
+              <StarIcon
                 className={styles.favoriteButton}
                 onClick={() => {
                   unFavoriteBook();
                 }}
-              ></button>
+              />
             ) : (
-              <button
-                className={styles.notFavoriteButton}
+              <StarBorderIcon
+                className={styles.favoriteButton}
                 onClick={() => {
                   setBookAsFavorite();
                 }}
-              ></button>
+              />
             )}
           </Box>
-          <button className={styles.deleteButton} onClick={handleDelete}>
-            מחק
-          </button>
+          <Box className={styles.buttonContainer}>
+            <DeleteIcon
+              className={styles.deleteButton}
+              onClick={handleDelete}
+            />
+          </Box>
         </Box>
       ) : (
         <Box></Box>
