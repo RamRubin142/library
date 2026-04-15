@@ -19,7 +19,7 @@ export const OneAuthorControl = () => {
   if (!author || !selectedAuthorId || Array.isArray(author)) {
     return (
       <Box
-        sx={{ border: 1, height: "80vh", padding: "20px", width: "50%" }}
+        sx={{ border: 1, height: "80vh", padding: "2vmin", width: "40%" }}
       ></Box>
     );
   } else {

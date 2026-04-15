@@ -43,7 +43,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
       onClick={() => props.onSelect(props.id)}
     >
       <Box className={styles.dataSection}>
-        <Box className={styles.name}>
+
           <Box>
             {props.isCurrentlyEdited ? (
               <input
@@ -59,7 +59,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
               <Box className={styles.text}>{`מזהה : ${props.serialId}   שם :  ${props.name}`}</Box>
             )}
           </Box>
-        </Box>
+
         {props.author && !props.isCurrentlyEdited ? (
           <Box className={styles.text}>{`סופר : ${props.author}`}</Box>
         ) : (

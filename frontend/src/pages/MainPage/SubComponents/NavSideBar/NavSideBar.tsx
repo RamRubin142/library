@@ -1,5 +1,4 @@
-import Button from "@mui/material/Button";
-import { Box, ButtonGroup } from "@mui/material";
+import { Box } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./NavSideBar.module.css";
 
@@ -10,8 +9,8 @@ export const NavSideBar = () => {
 
   return (
     <Box className={styles.navBar}>
-      <ButtonGroup orientation="vertical" aria-label="Vertical button group">
-        <Button
+      <Box className={styles.buttonGroup}>
+        <button
           className={
             location.pathname == "/home/users"
               ? styles.selectedButtonStyle
@@ -22,8 +21,8 @@ export const NavSideBar = () => {
           }}
         >
           ניהול משתמשים
-        </Button>
-        <Button
+        </button>
+        <button
           className={
             location.pathname == "/home/books"
               ? styles.selectedButtonStyle
@@ -34,8 +33,8 @@ export const NavSideBar = () => {
           }}
         >
           ניהול ספרים
-        </Button>
-        <Button
+        </button>
+        <button
           className={
             location.pathname == "/home/authors"
               ? styles.selectedButtonStyle
@@ -46,8 +45,8 @@ export const NavSideBar = () => {
           }}
         >
           ניהול סופרים
-        </Button>
-      </ButtonGroup>
+        </button>
+      </Box>
     </Box>
   );
 };

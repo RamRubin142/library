@@ -1,24 +1,20 @@
 .title {
   text-overflow: ellipsis !important;
   overflow: hidden !important;
-  max-width: 200px !important;
+  max-width: 50vmin !important;
   height: 1.2em !important;
   white-space: nowrap !important;
-  margin-right: 4px !important;
-  margin-left: 4px !important;
-}
-
-.outerBox {
-  border: 1px solid !important;
+  margin-right: 1vmin;
 }
 
 .toolbar {
   background-color: beige !important;
-  border: 3px solid brown !important;
+  border: 0.5vmin solid brown !important;
   border-bottom: 0;
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between !important;
+  align-items: center;
 }
 
 .rightContainer {
@@ -36,12 +32,13 @@
 .userRow {
   display: flex !important;
   flex-direction: row !important;
-  font-size: 14pt !important;
+  font-size: 4vmin !important;
 }
 
 .favText {
-  font-size: 10pt !important;
+  font-size: 3vmin !important;
   color: black !important;
+  margin: 0;
 }
 
 .titleText {
@@ -55,79 +52,99 @@
 .logoutButton {
   background: linear-gradient(145deg, #ff8c00, #ff5e00) !important;
   color: white !important;
-  width: 110px !important;
-  height: 38px !important;
+  min-width: unset !important;
+  min-height: unset !important;
+  width: 16vmin !important;
+  max-width: 16vmin !important;
+  height: 8vmin !important;
+
   border: none !important;
-  border-radius: 8px !important;
-  font-size: 13pt !important;
+  border-radius: 1vmin !important;
+
+  font-size: 2.2vmin !important;
   font-weight: 600 !important;
-  margin-right: 80px !important;
+
+  margin-right: 8vmin !important;
+  margin-left: 2vmin !important;
+
   cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
 
   /* 3D depth */
   box-shadow:
-    0 4px 0 #cc4a00,
-    0 6px 12px rgba(0, 0, 0, 0.25) !important;
+    0 0.5vmin 0 #cc4a00,
+    0 0.8vmin 1.5vmin rgba(0, 0, 0, 0.25) !important;
 
   transition: all 0.15s ease !important;
 }
 
-/* hover = lift + glow */
+/* hover */
 .logoutButton:hover {
-  transform: translateY(-2px) !important;
+  transform: translateY(-0.3vmin) !important;
   box-shadow:
-    0 6px 0 #cc4a00,
-    0 10px 18px rgba(0, 0, 0, 0.3) !important;
+    0 0.7vmin 0 #cc4a00,
+    0 1.2vmin 2vmin rgba(0, 0, 0, 0.3) !important;
 }
 
-/* click = pressed */
+/* click */
 .logoutButton:active {
-  transform: translateY(4px) !important;
+  transform: translateY(0.6vmin) !important;
   box-shadow:
-    0 1px 0 #cc4a00,
-    0 3px 6px rgba(0, 0, 0, 0.2) !important;
+    0 0.2vmin 0 #cc4a00,
+    0 0.4vmin 0.8vmin rgba(0, 0, 0, 0.2) !important;
 }
 
-/* optional: subtle pulse on hover */
+/* glow */
 .logoutButton:hover::after {
   content: "" !important;
   position: absolute !important;
   inset: 0 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 0 12px rgba(255, 94, 0, 0.6) !important;
+  border-radius: 1vmin !important;
+  box-shadow: 0 0 1.5vmin rgba(255, 94, 0, 0.6) !important;
   opacity: 0.6 !important;
 }
-
 .dialogButtons {
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
-  gap: 10px !important;
-  margin-bottom: 10px;
-  margin-top: 15px;
+  gap: 2vmin !important;
+  margin-bottom: 1vmin;
+  margin-top: 1vmin;
 }
 
 .yesButton {
   background-color: lightgreen !important;
-  color : white !important;
+  color: white !important;
+  height: 7vmin;
+  width: 10vmin;
+    border : 0;
+  border-radius: 1vmin;
 }
 
 .yesButton:hover {
   background-color: green !important;
-  color : white !important;
+  color: white !important;
 }
 .noButton {
   background-color: rgb(248, 85, 85) !important;
-  color : white !important;
+  color: white !important;
+  height: 7vmin;
+  width: 10vmin;
+  border : 0;
+  border-radius: 1vmin;
 }
 
 .noButton:hover {
-    background-color: red !important;
-
+  background-color: red !important;
 }
 
 .logoutPopup {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.dialogTitle {
+  font-size: 5vmin !important;
 }

@@ -1,12 +1,10 @@
-
-.text{
-  text-overflow: ellipsis !important; 
+.text {
+  text-overflow: ellipsis !important;
   overflow: hidden !important;
   max-width: 390px !important;
   height: 1.2em !important;
   white-space: nowrap !important;
 }
-
 
 .container {
   display: flex !important;
@@ -21,67 +19,80 @@
 }
 
 .formControl {
-  width: 400px !important;
-  margin-top: 100px;
+  width: 60vmin !important;
+  height : 10vmin !important;
+  margin-top: 10vmin !important ;
+  font-size: 5vmin !important;
 }
-
 .loginButton {
   background: linear-gradient(145deg, #28a745, #1e7e34) !important;
   color: white !important;
-  width: 160px !important;
-  height: 40px !important;
+
+  width: 30vmin !important;
+  height: 10vmin !important;
+
   border: none !important;
-  border-radius: 10px !important;
-  font-size: 14pt !important;
+  border-radius: 1vmin !important;
+
+  font-size: 5vmin !important;
   font-weight: 600 !important;
-  margin-top: 50px !important;
+
+  margin-top: 5vmin !important;
+
   cursor: pointer !important;
 
   position: relative !important;
   overflow: hidden !important;
 
+  /* 🔴 important for MUI */
+  min-width: unset !important;
+  padding: 0 !important;
+
   /* 3D depth */
   box-shadow:
-    0 4px 0 #145c2c,
-    0 6px 14px rgba(0, 0, 0, 0.25) !important;
+    0 0.5vmin 0 #145c2c,
+    0 0.8vmin 1.8vmin rgba(0, 0, 0, 0.25) !important;
 
   transition: all 0.15s ease !important;
 }
 
-/* hover = lift + glow */
+/* hover */
 .loginButton:hover {
-  transform: translateY(-2px) !important;
+  transform: translateY(-0.3vmin) !important;
   box-shadow:
-    0 6px 0 #145c2c,
-    0 10px 20px rgba(0, 0, 0, 0.3) !important;
+    0 0.7vmin 0 #145c2c,
+    0 1.2vmin 2.5vmin rgba(0, 0, 0, 0.3) !important;
 }
 
-/* click = pressed */
+/* click */
 .loginButton:active {
-  transform: translateY(4px) !important;
+  transform: translateY(0.6vmin) !important;
   box-shadow:
-    0 1px 0 #145c2c,
-    0 3px 6px rgba(0, 0, 0, 0.2) !important;
+    0 0.2vmin 0 #145c2c,
+    0 0.4vmin 1vmin rgba(0, 0, 0, 0.2) !important;
 }
 
-/* subtle shine effect */
+/* shine */
 .loginButton::after {
   content: "" !important;
   position: absolute !important;
   top: 0 !important;
   left: -75% !important;
+
   width: 50% !important;
   height: 100% !important;
+
   background: linear-gradient(
     120deg,
     transparent,
     rgba(255, 255, 255, 0.4),
     transparent
   ) !important;
+
   transform: skewX(-20deg) !important;
 }
 
-/* shine animation on hover */
+/* shine animation */
 .loginButton:hover::after {
   left: 120% !important;
   transition: left 0.5s ease !important;

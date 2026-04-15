@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogTitle } from "@mui/material";
+import { Box, Dialog, DialogTitle } from "@mui/material";
 import styles from "./UserDataSection.module.css";
 import { useSelector } from "react-redux";
 import type { RootState } from "@redux/store";
@@ -6,7 +6,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import type { UserInterface } from "@models/users/UserInterface";
 import type { BookInterface } from "@models/books/BookInterface";
-import PsychologyIcon from "@mui/icons-material/Psychology";
 import {
   getUserById,
   favoriteBooksOfUser,
@@ -114,7 +113,22 @@ export const OneUserControl = () => {
             <button className={styles.addButton} onClick={handleAddBookButton}>
               הוסף ספר
             </button>
-            <Dialog open={addBookPopupIsOpen}>
+            <Dialog
+              open={addBookPopupIsOpen}
+              aria-labelledby="customized-dialog-title"
+              sx={{
+                "& .MuiDialog-container": {
+                  "& .MuiPaper-root": {
+                    width: "100%",
+                    height : "100%",
+                    maxWidth: "75vmin",
+                    maxHeight: "37vmin", 
+                    backgroundColor : "beige",
+                    border : "0.5vmin dashed brown"
+                  },
+                },
+              }}
+            >
               <Box className={styles.dialog}>
                 {books &&
                 books.filter((book) => !listOfBookIds?.includes(book?._id))
@@ -141,17 +155,22 @@ export const OneUserControl = () => {
                   </Box>
                 ) : (
                   <>
-                    <DialogTitle>אין בספריה ספרים שעוד לא קראת</DialogTitle>
-                    <PsychologyIcon className={styles.icon}/>
+                    <DialogTitle className={styles.dialogTitle}>
+                      אין בספריה ספרים שעוד לא קראת
+                    </DialogTitle>
+                    <img
+                      className={styles.patrick}
+                      src="https://pbs.twimg.com/media/E-DYbZwX0AEXLhU.jpg"
+                    />
                   </>
                 )}
 
-                <Button
+                <button
                   className={styles.closeButton}
                   onClick={() => setAddBookPopupIsOpen(false)}
                 >
                   סגור
-                </Button>
+                </button>
               </Box>
             </Dialog>
           </Box>

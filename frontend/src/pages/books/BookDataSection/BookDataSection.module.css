@@ -1,30 +1,27 @@
-.addButton {
-  background-color: blueviolet;
-  color: white;
-  width: 100px;
-  height: 30px;
-}
-
 .topBar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-bottom: 10px;
+  padding-bottom: 2vmin;
 }
 
 .topBarText {
   display: flex;
   flex-direction: row;
+  font-size: 3vmin;
+  white-space: nowrap;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
 }
 
 .title {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 200px;
-  height: 1.2em;
-  white-space: nowrap;
-  margin-right: 4px !important;
-  margin-left: 4px !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  height: 1.2em !important;
+  white-space: nowrap !important;
+  margin-right: 1vmin !important;
+  margin-left: 1vmin !important;
+  width: 50% !important;
 }
 
 .booksArea {
@@ -34,11 +31,11 @@
   width: 90%;
 }
 
-.dataSection {  
+.dataSection {
   background-color: beige;
-  border: 3px solid brown;
+  border: 0.5vmin solid brown;
   height: 80v;
   padding: 20px;
   width: 50%;
-  overflow: auto;
+  padding: 2vmin;
 }

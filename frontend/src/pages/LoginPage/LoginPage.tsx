@@ -2,7 +2,7 @@ import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -30,9 +30,9 @@ export const LoginPage = () => {
 
   return (
     <Box className={styles.container}>
-      <TitleComponent size={"100pt"} color={"black"} />
+      <TitleComponent size={"30vmin"} color={"black"} />
 
-      <FormControl className={styles.formControl} size="medium">
+      <FormControl className={styles.formControl} >
         <InputLabel id="demo-select-small-label">
           בחר משתמש להתחברות ...
         </InputLabel>
@@ -54,9 +54,11 @@ export const LoginPage = () => {
         </Select>
       </FormControl>
 
-      <Button className={styles.loginButton} onClick={handleLogin}>
+      <button className={styles.loginButton} onClick={handleLogin}>
         התחבר
-      </Button>
+      </button>
     </Box>
   );
 };
+
+

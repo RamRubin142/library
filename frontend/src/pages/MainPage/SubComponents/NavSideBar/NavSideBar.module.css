@@ -2,15 +2,34 @@
   background-color: beige !important;
   color: black !important;
   border-radius: 0 !important;
+  width: 30vmin !important;
+  height: 8vmin !important;
+  font-size: 3vmin !important;
+  min-width: unset !important;
+  min-height: unset !important;
+  border: 0.2vmin solid brown !important;
+  cursor: pointer;
 }
 
 .selectedButtonStyle {
   background-color: rgb(183, 73, 73) !important;
   color: white !important;
   border-radius: 0 !important;
+  width: 30vmin !important;
+  height: 8vmin !important;
+  font-size: 3vmin !important;
+  min-width: unset !important;
+  min-height: unset !important;
+  border: 0.2vmin solid brown !important;
 }
 
 .navBar {
-    border : 3px solid brown;
-    height : 86.3vh;
+  border: 0.5vmin solid brown;
+  height: 86.1vmin;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }

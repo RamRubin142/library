@@ -6,7 +6,7 @@ export const MainPage = () => {
   return (
     <Box sx={{backgroundColor : "beige"}}>
       <TitleBar />
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
+      <Box sx={{ display: "flex", flexDirection: "row"}}>
         <NavSideBar />
         <Outlet />
       </Box>

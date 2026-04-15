@@ -5,12 +5,15 @@
   align-items: center;
   width: 95%;
 
-  box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45);
-  border-radius: 10px;
+  box-shadow:
+    inset 0 1vmin 2vmin rgba(0, 0, 0, 0.16),
+    0 1vmin 2vmin rgba(0, 0, 0, 0.45);
+  border-radius: 2vmin;
   background-color: rgb(221, 187, 187);
 
-  margin-bottom: 10px;
-  min-height : 40px;
+  margin-bottom: 2vmin;
+  min-height: 7vmin;
+  cursor: pointer;
 }
 
 .selectedBookContainer {
@@ -18,26 +21,34 @@
   flex-direction: row;
   justify-content: space-between;
   width: 95%;
-  box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45);
-  border-radius: 10px;
-  margin-bottom: 10px;
+  box-shadow:
+    inset 0 1vmin 2vmin rgba(0, 0, 0, 0.16),
+    0 1vmin 2vmin rgba(0, 0, 0, 0.45);
+  border-radius: 2vmin;
+  margin-bottom: 2vmin;
   background-color: rgb(156, 83, 83);
   color: white;
-  min-height : 40px;
+  min-height: 7vmin;
   align-items: center;
 }
 
 .dataSection {
   display: flex;
-  padding-right: 5px;
+  padding-right: 1.5vmin;
   flex-direction: column;
   margin-bottom: 0;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-.name {
-  display: flex;
-  flex-direction: row;
-  margin: 0;
+.text {
+  font-size: 3vmin;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 50%;
+  height: 1.2em;
+  white-space: nowrap;
 }
 
 .buttons {
@@ -45,38 +56,34 @@
   flex-direction: row;
   align-content: flex-start;
   border: none;
-  margin-left: 7px;
+  margin-left: 1.5vmin;
 }
 
+.deleteButton {
+  font-size: 5vmin !important;
+}
 
+.editButton {
+  font-size: 5vmin !important;
+}
 
 .deleteButton:hover {
-  font-size: 30px;
+  font-size: 6vmin !important;
   border-color: transparent;
+  cursor: pointer;
 }
 
 .editButton:hover {
-  font-size: 30px;
+  font-size: 6vmin !important;
   border-color: transparent;
+  cursor: pointer;
 }
-
-
-.text {
-  font-size: large; 
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 200px;
-  height: 1.2em;
-  white-space: nowrap;
-
-}
-
 
 .editBox {
-  font-size: large;
-  border-radius: 10px;
+  font-size: 3vmin;
+  border-radius: 5vmin;
   border-color: white;
-  background-color: rgb(156, 83, 83) ;
+  background-color: rgb(156, 83, 83);
 }
 
 .buttonContainer {
@@ -84,5 +91,5 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30px;
+  width: 5vmin;
 }

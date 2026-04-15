@@ -1,4 +1,4 @@
-import { Box, Toolbar, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -39,8 +39,8 @@ export const TitleBar = () => {
 
   return (
     <Box className={styles.outerBox}>
-      <Toolbar className={styles.toolbar}>
-        <TitleComponent size={"40pt"} color={"black"} />
+      <Box className={styles.toolbar}>
+        <TitleComponent size={"10vmin"} color={"black"} />
         <Box className={styles.rightContainer}>
           <Box className={styles.userSection}>
             <Box className={styles.userRow}>
@@ -59,36 +59,51 @@ export const TitleBar = () => {
             )}
           </Box>
 
-          <Button
+          <button
             className={styles.logoutButton}
             onClick={() => {
               setLogoutPopupOpen(true);
             }}
           >
             התנתק
-          </Button>
+          </button>
 
-          <Dialog open={logoutPopupOpen}> 
-            <DialogTitle>האם אתה בטוח שברצונך להתנתק ?</DialogTitle>
+          <Dialog
+            open={logoutPopupOpen}
+            aria-labelledby="customized-dialog-title"
+            sx={{
+              "& .MuiDialog-container": {
+                "& .MuiPaper-root": {
+                  width: "100%",
+                  height: "100%",
+                  maxWidth: "75vmin",
+                  maxHeight: "37vmin",
+                  backgroundColor: "beige",
+                  border: "0.5vmin dashed brown",
+                },
+              },
+            }}
+          >
+            <DialogTitle className={styles.dialogTitle}>האם אתה בטוח שברצונך להתנתק ?</DialogTitle>
             <Box className={styles.logoutPopup}>
               <LogoutIcon />
               <Box className={styles.dialogButtons}>
-                <Button className={styles.yesButton} onClick={handleLogout}>
+                <button className={styles.yesButton} onClick={handleLogout}>
                   כן
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={() => {
                     setLogoutPopupOpen(false);
                   }}
                   className={styles.noButton}
                 >
                   לא
-                </Button>
+                </button>
               </Box>
             </Box>
           </Dialog>
         </Box>
-      </Toolbar>
+      </Box>
     </Box>
   );
 };
