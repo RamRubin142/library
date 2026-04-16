@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { BookInterface } from "@models/books/BookInterface";
 import type { UserInterface } from "@models/users/UserInterface";
 import { getUserById } from "@api/users.api";
@@ -37,6 +37,27 @@ export const TitleBar = () => {
     navigate("/login");
   };
 
+  function isupperOverflowActive(event: any) {
+    if (!event) return false;
+    return (
+      event.offsetHeight < event.scrollHeight ||
+      event.offsetWidth < event.scrollWidth
+    );
+  }
+
+  useEffect(() => {
+    if (isupperOverflowActive(upperTextRef?.current)) {
+      setupperOverflowActive(true);
+      return;
+    }
+
+    setupperOverflowActive(false);
+  }, [isupperOverflowActive]);
+
+  const [upperOverflowActive, setupperOverflowActive] = useState(false);
+
+  const upperTextRef = useRef<HTMLDivElement | null>(null);
+
   return (
     <Box className={styles.outerBox}>
       <Box className={styles.toolbar}>
@@ -45,7 +66,15 @@ export const TitleBar = () => {
           <Box className={styles.userSection}>
             <Box className={styles.userRow}>
               שלום
-              <Box className={styles.title}>{user?.name}</Box>!
+              <Tooltip
+                title={user?.name}
+                disableHoverListener={!upperOverflowActive}
+              >
+                <Box ref={upperTextRef} className={styles.title}>
+                  {user?.name}
+                </Box>
+              </Tooltip>
+              !
             </Box>
 
             {favBook?._id ? (
@@ -79,12 +108,14 @@ export const TitleBar = () => {
                   maxHeight: "30vmin",
                   backgroundColor: "beige",
                   border: "0.5vmin dashed brown",
-                  borderRadius : "0",
+                  borderRadius: "0",
                 },
               },
             }}
           >
-            <DialogTitle className={styles.dialogTitle}>האם אתה בטוח שברצונך להתנתק ?</DialogTitle>
+            <DialogTitle className={styles.dialogTitle}>
+              האם אתה בטוח שברצונך להתנתק ?
+            </DialogTitle>
             <Box className={styles.logoutPopup}>
               <LogoutIcon className={styles.icon} />
               <Box className={styles.dialogButtons}>

@@ -1,6 +1,12 @@
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import styles from "./SelectionSectionCard.module.css";
-import type { KeyboardEvent, ChangeEvent } from "react";
+import {
+  type KeyboardEvent,
+  type ChangeEvent,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
@@ -35,6 +41,47 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
     }
   };
 
+  function isupperOverflowActive(event: any) {
+    if (!event) return false;
+    return (
+      event.offsetHeight < event.scrollHeight ||
+      event.offsetWidth < event.scrollWidth
+    );
+  }
+  function islowerOverflowActive(event: any) {
+    if (!event) return false;
+    return (
+      event.offsetHeight < event.scrollHeight ||
+      event.offsetWidth < event.scrollWidth
+    );
+  }
+
+  useEffect(() => {
+    if (isupperOverflowActive(upperTextRef?.current)) {
+      setupperOverflowActive(true);
+      return;
+    }
+
+    setupperOverflowActive(false);
+  }, [isupperOverflowActive]);
+
+  const [upperOverflowActive, setupperOverflowActive] = useState(false);
+
+  const upperTextRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (islowerOverflowActive(lowerTextRef?.current)) {
+      setlowerOverflowActive(true);
+      return;
+    }
+
+    setlowerOverflowActive(false);
+  }, [islowerOverflowActive]);
+
+  const [lowerOverflowActive, setlowerOverflowActive] = useState(false);
+
+  const lowerTextRef = useRef<HTMLDivElement | null>(null);
+
   return (
     <Box
       className={
@@ -43,25 +90,40 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
       onClick={() => props.onSelect(props.id)}
     >
       <Box className={styles.dataSection}>
-
-          <Box>
-            {props.isCurrentlyEdited ? (
-              <input
-                className={styles.editBox}
-                type="text"
-                value={props.currentlyEditedText ?? ""}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  props.onEditTextChange(props.id, e.target.value);
-                }}
-                onKeyDown={editTaskHandler}
-              />
-            ) : (
-              <Box className={styles.text}>{`מזהה : ${props.serialId}   שם :  ${props.name}`}</Box>
-            )}
-          </Box>
+        <Box>
+          {props.isCurrentlyEdited ? (
+            <input
+              className={styles.editBox}
+              type="text"
+              value={props.currentlyEditedText ?? ""}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                props.onEditTextChange(props.id, e.target.value);
+              }}
+              onKeyDown={editTaskHandler}
+            />
+          ) : (
+            <Tooltip
+              title={props.name}
+              disableHoverListener={!upperOverflowActive}
+            >
+              <Box
+                className={styles.text}
+                ref={upperTextRef}
+              >{`מזהה : ${props.serialId}   שם :  ${props.name}`}</Box>
+            </Tooltip>
+          )}
+        </Box>
 
         {props.author && !props.isCurrentlyEdited ? (
-          <Box className={styles.text}>{`סופר : ${props.author}`}</Box>
+          <Tooltip
+            title={props.author}
+            disableHoverListener={!lowerOverflowActive}
+          >
+            <Box
+              className={styles.text}
+              ref={lowerTextRef}
+            >{`סופר : ${props.author}`}</Box>
+          </Tooltip>
         ) : (
           <></>
         )}

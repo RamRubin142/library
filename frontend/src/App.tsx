@@ -7,6 +7,7 @@ import { AuthorControl } from "./pages/authors/AuthorSection/AuthorSection";
 import { useSelector } from "react-redux";
 import type { RootState } from "./redux/store";
 import styles from "./App.module.css";
+
 export const App = () => {
   const loggedUserId = useSelector(
     (state: RootState) => state.loggedUser.loggedUserId,
@@ -15,8 +16,11 @@ export const App = () => {
     const auth = loggedUserId != null;
     return auth ? <Outlet /> : <Navigate to="/login" />;
   };
+;
 
   return (
+    
+
     <div className={styles.font}>
       <Routes>
         <Route element={<PrivateRoutes />}>
