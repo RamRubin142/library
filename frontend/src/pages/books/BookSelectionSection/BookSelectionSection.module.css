@@ -1,6 +1,6 @@
 .selectionSection {
     background-color: beige;
-    border: solid brown;
+    border:  0.5vmin solid brown;
     height: 80v;
     padding: 3vmin !important;
     width: 50%;

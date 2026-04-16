@@ -118,8 +118,11 @@
   color: white !important;
   height: 7vmin;
   width: 10vmin;
-    border : 0;
+  border: 0;
   border-radius: 1vmin;
+  font-size: 3vmin;
+  padding: 0;
+  cursor: pointer;
 }
 
 .yesButton:hover {
@@ -131,8 +134,11 @@
   color: white !important;
   height: 7vmin;
   width: 10vmin;
-  border : 0;
+  border: 0;
   border-radius: 1vmin;
+  font-size: 3vmin;
+  padding: 0;
+  cursor: pointer;
 }
 
 .noButton:hover {
@@ -147,4 +153,11 @@
 
 .dialogTitle {
   font-size: 5vmin !important;
+  white-space: nowrap;
+  padding: 0 !important;
+  margin-right: 2vmin !important;
+}
+
+.icon {
+  font-size: 10vmin !important;
 }

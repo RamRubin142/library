@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -70,23 +70,23 @@ export const TitleBar = () => {
 
           <Dialog
             open={logoutPopupOpen}
-            aria-labelledby="customized-dialog-title"
             sx={{
               "& .MuiDialog-container": {
                 "& .MuiPaper-root": {
                   width: "100%",
                   height: "100%",
                   maxWidth: "75vmin",
-                  maxHeight: "37vmin",
+                  maxHeight: "30vmin",
                   backgroundColor: "beige",
                   border: "0.5vmin dashed brown",
+                  borderRadius : "0",
                 },
               },
             }}
           >
             <DialogTitle className={styles.dialogTitle}>האם אתה בטוח שברצונך להתנתק ?</DialogTitle>
             <Box className={styles.logoutPopup}>
-              <LogoutIcon />
+              <LogoutIcon className={styles.icon} />
               <Box className={styles.dialogButtons}>
                 <button className={styles.yesButton} onClick={handleLogout}>
                   כן

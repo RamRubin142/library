@@ -4,6 +4,8 @@
   max-width: 390px !important;
   height: 1.2em !important;
   white-space: nowrap !important;
+  font-size: 3vmin !important;
+  height: 3vmin !important;
 }
 
 .container {
@@ -20,8 +22,7 @@
 
 .formControl {
   width: 60vmin !important;
-  height : 10vmin !important;
-  margin-top: 10vmin !important ;
+  margin-top: 7vmin !important ;
   font-size: 5vmin !important;
 }
 .loginButton {
@@ -96,4 +97,9 @@
 .loginButton:hover::after {
   left: 120% !important;
   transition: left 0.5s ease !important;
+}
+
+.selectList {
+  max-height: 20vmin !important;
+  overflow-y: scroll !important;
 }

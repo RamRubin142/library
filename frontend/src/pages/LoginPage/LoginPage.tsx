@@ -24,33 +24,101 @@ export const LoginPage = () => {
   const dispatch = useDispatch();
 
   const handleLogin = async () => {
-    dispatch(logUserIn(selectedUser));
-    navigate("/home");
+    if (selectedUser) {
+      dispatch(logUserIn(selectedUser));
+      navigate("/home");
+    }
   };
 
   return (
     <Box className={styles.container}>
       <TitleComponent size={"30vmin"} color={"black"} />
 
-      <FormControl className={styles.formControl} >
-        <InputLabel id="demo-select-small-label">
+      <FormControl
+        className={styles.formControl}
+        sx={{
+          "& .MuiInputBase-root": {
+            fontSize: "3vmin",
+            height: "10vmin",
+            marginTop: "2vmin",
+          },
+
+          "& .MuiSelect-select": {
+            padding: "1vmin",
+            display: "flex",
+            alignItems: "center",
+          },
+
+          "& .MuiOutlinedInput-notchedOutline": {
+            border: "0.3vmin solid brown",
+          },
+
+          "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "black",
+          },
+
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: "blue",
+            },
+          "& .mui-rtl-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root":
+            {
+              borderRadius: "0",
+            },
+          "& .mui-rtl-18jp67o-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.mui-rtl-18jp67o-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.mui-rtl-18jp67o-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+            {
+              padding: "2vmin",
+            },
+          "& .MuiSelect-icon": {
+            fontSize: "5vmin",
+            right: "3vmin",
+          },
+          "& .MuiInputLabel-root": {
+            fontSize: "3vmin",
+            transform: "translate(1.5vmin, 1.5vmin) scale(1)",
+          },
+
+          "& .MuiInputLabel-shrink": {
+            transform: "translate(1.5vmin, -1vmin) scale(0.8)",
+          },
+        }}
+      >
+        <InputLabel
+          shrink
+          sx={{
+            "& .MuiInputLabel-root": {
+              fontSize: "3vmin",
+              marginTop: "1vmin",
+            },
+          }}
+        >
           בחר משתמש להתחברות ...
         </InputLabel>
 
         <Select
-          labelId="demo-select-small-label"
-          id="demo-select-small"
+          notched={false}
+          displayEmpty
           value={selectedUser}
-          label="בחר משתמש להתחברות ..."
+          label="משתמש"
           onChange={(event) => {
             selectUser(event.target.value);
           }}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                maxHeight: "30vmin", // 👈 fixed height
+                overflowY: "auto", // 👈 enable scroll
+              },
+            },
+          }}
         >
-          {users.map((user) => (
-            <MenuItem key={user._id} value={user._id} className={styles.text}>
-              {user.name}
-            </MenuItem>
-          ))}
+          
+            {users.map((user) => (
+              <MenuItem key={user._id} value={user._id} className={styles.text}>
+                {user.name}
+              </MenuItem>
+            ))}
+
         </Select>
       </FormControl>
 
@@ -60,5 +128,3 @@ export const LoginPage = () => {
     </Box>
   );
 };
-
-

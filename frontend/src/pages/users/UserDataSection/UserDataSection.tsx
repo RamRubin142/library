@@ -81,7 +81,7 @@ export const OneUserControl = () => {
   if (!user || !selectedUserId || Array.isArray(user)) {
     return (
       <Box
-        sx={{ border: 1, height: "80vh", padding: "20px", width: "50%" }}
+        sx={{ height: "80vh", padding: "20px", width: "50%" }}
       ></Box>
     );
   }
@@ -109,7 +109,7 @@ export const OneUserControl = () => {
           )}
         </Box>
         {selectedUserIsLogged ? (
-          <Box>
+          <>
             <button className={styles.addButton} onClick={handleAddBookButton}>
               הוסף ספר
             </button>
@@ -120,11 +120,12 @@ export const OneUserControl = () => {
                 "& .MuiDialog-container": {
                   "& .MuiPaper-root": {
                     width: "100%",
-                    height : "100%",
+                    height: "100%",
                     maxWidth: "75vmin",
-                    maxHeight: "37vmin", 
-                    backgroundColor : "beige",
-                    border : "0.5vmin dashed brown"
+                    maxHeight: "45vmin",
+                    backgroundColor: "beige",
+                    border: "0.5vmin dashed brown",
+                    borderRadius: "0",
                   },
                 },
               }}
@@ -135,23 +136,26 @@ export const OneUserControl = () => {
                   ?.length > 0 ? (
                   <Box
                     sx={{
-                      p: 1,
-                      bgcolor: "background.paper",
+                      bgcolor: "beige",
                       display: "flex",
                       flexDirection: "column",
                     }}
                   >
-                    <DialogTitle>בחר ספר</DialogTitle>
-                    {books
-                      ?.filter((book) => !listOfBookIds?.includes(book._id))
-                      .map((book) => (
-                        <Box
-                          className={styles.addBookComponent}
-                          onClick={() => handleAddBook(book._id)}
-                        >
-                          {book.name}
-                        </Box>
-                      ))}
+                    <DialogTitle className={styles.dialogTitle}>
+                      בחר ספר
+                    </DialogTitle>
+                    <Box className={styles.listComponent}>
+                      {books
+                        ?.filter((book) => !listOfBookIds?.includes(book._id))
+                        .map((book) => (
+                          <Box
+                            className={styles.addBookComponent}
+                            onClick={() => handleAddBook(book._id)}
+                          >
+                            {book.name}
+                          </Box>
+                        ))}
+                    </Box>
                   </Box>
                 ) : (
                   <>
@@ -173,7 +177,7 @@ export const OneUserControl = () => {
                 </button>
               </Box>
             </Dialog>
-          </Box>
+          </>
         ) : (
           <Box></Box>
         )}

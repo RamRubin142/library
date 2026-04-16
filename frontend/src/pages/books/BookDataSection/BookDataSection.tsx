@@ -33,7 +33,7 @@ export const OneBookControl = () => {
   if (!book || !selectedBookId || Array.isArray(book)) {
     return (
       <Box
-        sx={{ border: 1, height: "80vh", padding: "20px", width: "50%" }}
+        sx={{ height: "80vh", padding: "20px", width: "50%" }}
       ></Box>
     );
   }
