@@ -8,8 +8,8 @@
 }
 
 .toolbar {
-  background-color: beige !important;
-  border: 0.5vmin solid brown !important;
+
+  border: 0.5vmin solid black !important;
   border-bottom: 0;
   display: flex !important;
   flex-direction: row !important;
@@ -37,12 +37,10 @@
 
 .favText {
   font-size: 3vmin !important;
-  color: black !important;
   margin: 0;
 }
 
 .titleText {
-  color: black !important;
   flex-grow: 2 !important;
   font-family: "Rubik maze", system-ui !important;
   font-weight: 500 !important;

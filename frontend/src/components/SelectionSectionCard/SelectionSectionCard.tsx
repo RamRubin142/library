@@ -87,6 +87,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
       className={
         props.isSelected ? styles.selectedBookContainer : styles.bookContainer
       }
+      sx = {{backgroundColor : props.isSelected ? "action.selected" : "action.disabled" }}
       onClick={() => props.onSelect(props.id)}
     >
       <Box className={styles.dataSection}>

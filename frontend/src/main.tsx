@@ -9,8 +9,7 @@ import createCache from "@emotion/cache";
 import rtlPlugin from "@mui/stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import { BrowserRouter } from "react-router-dom";
-
-
+import { ThemeContextProvider } from "theme/ThemeContextProvider";
 
 const rtlCache = createCache({
   key: "mui-rtl",
@@ -19,22 +18,23 @@ const rtlCache = createCache({
 
 const theme = createTheme({
   direction: "rtl",
-
 });
 
 document.body.dir = "rtl";
 
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
-      <CacheProvider value={rtlCache}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </CacheProvider>
-    </Provider>
-  </QueryClientProvider>
+  <ThemeContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <CacheProvider value={rtlCache}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ThemeProvider>
+        </CacheProvider>
+      </Provider>
+    </QueryClientProvider>
+  </ThemeContextProvider>,
 );

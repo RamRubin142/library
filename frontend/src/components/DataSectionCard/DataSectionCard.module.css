@@ -6,7 +6,6 @@
   box-shadow:
     inset 0 1vmin 2vmin rgba(0, 0, 0, 0.16),
     0 1vmin 2vmin rgba(0, 0, 0, 0.45);
-  background-color: rgb(221, 187, 187);
   border-radius: 2vmin;
   margin-bottom: 2vmin;
   min-height: 7vmin;
@@ -49,7 +48,6 @@
 }
 
 .deleteButton {
-  color: black;
   font-size: 5vmin !important;
 }
 

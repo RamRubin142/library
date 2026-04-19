@@ -85,8 +85,7 @@
 }
 
 .dataSection {
-  background-color: beige;
-  border: 0.5vmin solid brown;
+  border: 0.5vmin solid black;
   height: 80v;
   padding: 20px;
   width: 50%;

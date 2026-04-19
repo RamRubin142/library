@@ -9,10 +9,10 @@
     inset 0 1vmin 2vmin rgba(0, 0, 0, 0.16),
     0 1vmin 2vmin rgba(0, 0, 0, 0.45);
   border-radius: 2vmin;
-  background-color: rgb(221, 187, 187);
+
 
   margin-bottom: 2vmin;
-  min-height: 7vmin;
+  min-height: 9vmin;
   cursor: pointer;
 }
 
@@ -26,9 +26,8 @@
     0 1vmin 2vmin rgba(0, 0, 0, 0.45);
   border-radius: 2vmin;
   margin-bottom: 2vmin;
-  background-color: rgb(156, 83, 83);
-  color: white;
-  min-height: 7vmin;
+
+  min-height: 9vmin;
   align-items: center;
 }
 

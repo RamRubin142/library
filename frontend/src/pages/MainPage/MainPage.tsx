@@ -4,7 +4,7 @@ import { TitleBar } from "./SubComponents/TitleBar/TitleBar";
 import { Outlet } from "react-router-dom";
 export const MainPage = () => {
   return (
-    <Box sx={{backgroundColor : "beige"}}>
+    <Box sx={{backgroundColor : "background.default"}}>
       <TitleBar />
       <Box sx={{ display: "flex", flexDirection: "row"}}>
         <NavSideBar />

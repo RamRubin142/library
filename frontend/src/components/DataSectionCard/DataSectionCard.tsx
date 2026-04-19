@@ -68,7 +68,7 @@ export const DataSectionCard = (props: DataSectionCardProps) => {
   const lowerTextRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <Box className={styles.bookContainer}>
+    <Box className={styles.bookContainer} sx={{bgcolor : "action.disabled"}}>
       <Box className={styles.dataSection}>
         <Tooltip title={props.name} disableHoverListener={!upperOverflowActive}>
           <Box className={styles.text} ref={upperTextRef}>

@@ -15,7 +15,9 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@redux/store";
 import { TitleComponent } from "@components/TitleComponent/TitleComponent";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useThemeContext } from "theme/ThemeContextProvider";
 export const TitleBar = () => {
+  const { mode, toggleColorMode } = useThemeContext();
   const currentUserId = useSelector(
     (state: RootState) => state.loggedUser.loggedUserId,
   );
@@ -60,8 +62,11 @@ export const TitleBar = () => {
 
   return (
     <Box className={styles.outerBox}>
-      <Box className={styles.toolbar}>
-        <TitleComponent size={"10vmin"} color={"black"} />
+      <Box className={styles.toolbar} sx={{backgroundColor : "background.default", border : "0.5vmin solid divider", color : "text"}}>
+        <TitleComponent size={"10vmin"} color={mode === "light" ? "black" : "white"} />
+        <button onClick={toggleColorMode}>
+          ev
+        </button>
         <Box className={styles.rightContainer}>
           <Box className={styles.userSection}>
             <Box className={styles.userRow}>
