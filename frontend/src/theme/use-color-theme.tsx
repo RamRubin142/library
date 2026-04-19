@@ -1,22 +1,26 @@
-import { createTheme, type PaletteMode } from "@mui/material";
-import React from "react";
+import { createTheme } from "@mui/material";
 import { getDesignTokens } from "./theme";
+import { useDispatch, useSelector } from "react-redux";
+import { ChangeColorMode } from "@redux/themeSlice";
+import type { RootState } from "@redux/store";
+
 
 
 export const useColorTheme = () => {
-  const [mode, setMode] = React.useState<PaletteMode>("light");
+  const dispatch = useDispatch();
+  const colorMode = useSelector(
+    (state: RootState) => state.colorMode.colorMode,
+  ); 
 
-  const toggleColorMode = () =>
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  const toggleColorMode = () => {
+    dispatch(ChangeColorMode());
+  }
 
-  const modifiedTheme = React.useMemo(
-    () => createTheme(getDesignTokens(mode)),
-    [mode],
-  );
+  const modifiedTheme = createTheme(getDesignTokens(colorMode));
 
   return {
     theme: modifiedTheme,
-    mode,
+    mode : colorMode,
     toggleColorMode,
   };
 };

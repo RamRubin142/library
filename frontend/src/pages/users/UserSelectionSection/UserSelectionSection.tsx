@@ -72,29 +72,29 @@ export const ManyUsersControl = () => {
   };
 
   return (
-    <Box
-      className={styles.selectionSection}
-    >
-      {users.map((user) => (
-        <SelectionSectionCard
-          isSelected={selectedUserId == user._id}
-          isCurrentlyEdited={editedUserId == user._id}
-          currentlyEditedText={editedUserText}
-          onEditButtonChange={editButtonClicked}
-          onEditTextChange={editTextChanged}
-          key={user._id}
-          id={user._id}
-          name={user.name}
-          serialId={user.serialId}
-          onDelete={(id: string) => {
-            deleteMutation.mutate({ userId: id });
-          }}
-          onUpdate={(userId: string, newName: string) => {
-            editMutation.mutate({ userId, newName });
-          }}
-          onSelect={(id: string) => dispatch(selectUser(id))}
-        />
-      ))}
+    <Box className={styles.selectionSection}>
+      <Box className={styles.content}>
+        {users.map((user) => (
+          <SelectionSectionCard
+            isSelected={selectedUserId == user._id}
+            isCurrentlyEdited={editedUserId == user._id}
+            currentlyEditedText={editedUserText}
+            onEditButtonChange={editButtonClicked}
+            onEditTextChange={editTextChanged}
+            key={user._id}
+            id={user._id}
+            name={user.name}
+            serialId={user.serialId}
+            onDelete={(id: string) => {
+              deleteMutation.mutate({ userId: id });
+            }}
+            onUpdate={(userId: string, newName: string) => {
+              editMutation.mutate({ userId, newName });
+            }}
+            onSelect={(id: string) => dispatch(selectUser(id))}
+          />
+        ))}
+      </Box>
     </Box>
   );
 };

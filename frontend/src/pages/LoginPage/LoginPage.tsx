@@ -61,14 +61,7 @@ export const LoginPage = () => {
             {
               borderColor: "blue",
             },
-          "& .mui-rtl-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root":
-            {
-              borderRadius: "0",
-            },
-          "& .mui-rtl-18jp67o-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.mui-rtl-18jp67o-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.mui-rtl-18jp67o-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-            {
-              padding: "2vmin",
-            },
+
           "& .MuiSelect-icon": {
             fontSize: "5vmin",
             right: "3vmin",

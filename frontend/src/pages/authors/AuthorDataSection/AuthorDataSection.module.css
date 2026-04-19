@@ -1,5 +1,3 @@
-
-
 .topBar {
   display: flex;
   flex-direction: row;
@@ -7,12 +5,11 @@
   padding-bottom: 2vmin;
   text-overflow: ellipsis !important;
   overflow: hidden !important;
- 
 }
 
 .topBarText {
   display: flex;
-  font-size: 3vmin ;
+  font-size: 3vmin;
   white-space: nowrap;
   text-overflow: ellipsis !important;
   overflow: hidden !important;
@@ -35,7 +32,12 @@
 }
 .dataSection {
   border: 0.5vmin solid black;
-  height: 80v;
+  height: 84vmin;
   padding: 2vmin;
   width: 50%;
+  overflow: auto;
+  direction: ltr;
+}
+.content {
+  direction: rtl;
 }

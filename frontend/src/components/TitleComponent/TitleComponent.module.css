@@ -1,7 +1,8 @@
 .titleText {
-  color: black !important;
+  
   font-family: "Rubik Moonrocks", sans-serif !important;
   font-weight: 500 !important;
   font-style: normal !important ;
-  margin : 0;
+  margin-left : 7vmin;
+  margin-right: 1vmin;
 }

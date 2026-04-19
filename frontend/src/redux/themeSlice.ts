@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import {  type PaletteMode } from "@mui/material";
 
 const colorMode = "colorMode";
@@ -15,14 +15,14 @@ export const colorModeSlice = createSlice({
   name: colorMode,
   initialState,
   reducers: {
-    setColorMode: (state, action: PayloadAction<string>) => {
-      state.colorMode = action.payload as PaletteMode;
-      localStorage.setItem(colorMode, action.payload);
+    ChangeColorMode: (state) => {
+      state.colorMode = state.colorMode == "light" ? "dark" : "light";
+      localStorage.setItem(colorMode, state.colorMode);
     },
     
   },
 });
 
-export const { setColorMode } = colorModeSlice.actions;
+export const { ChangeColorMode } = colorModeSlice.actions;
 
 export default colorModeSlice.reducer;

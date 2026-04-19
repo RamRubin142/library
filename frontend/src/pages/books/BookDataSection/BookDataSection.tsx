@@ -31,47 +31,43 @@ export const OneBookControl = () => {
   });
 
   if (!book || !selectedBookId || Array.isArray(book)) {
-    return (
-      <Box
-        sx={{ height: "80vh", padding: "20px", width: "50%" }}
-      ></Box>
-    );
+    return <Box sx={{ height: "80vh", padding: "20px", width: "50%" }}></Box>;
   }
 
   return (
-    <Box
-      className={styles.dataSection}
-    >
-      <Box className={styles.topBar}>
-        {book.readers.length > 0 ? (
-          <Box className={styles.topBarText}>
-            הקוראים של
-            <Box className={styles.title}>
-              <b>{book.name}</b>
+    <Box className={styles.dataSection}>
+      <Box className={styles.content}>
+        <Box className={styles.topBar}>
+          {book.readers.length > 0 ? (
+            <Box className={styles.topBarText}>
+              הקוראים של
+              <Box className={styles.title}>
+                <b>{book.name}</b>
+              </Box>
             </Box>
-          </Box>
-        ) : (
-          <Box className={styles.topBarText}>
-            ל
-            <Box className={styles.title}>
-              <b>{book.name}</b>
+          ) : (
+            <Box className={styles.topBarText}>
+              ל
+              <Box className={styles.title}>
+                <b>{book.name}</b>
+              </Box>
+              אין קוראים
             </Box>
-            אין קוראים
-          </Box>
-        )}
-      </Box>
-      <Box className={styles.booksArea}>
-        {book.readers.map((reader) => (
-          <DataSectionCard
-            key={reader._id}
-            id={reader._id}
-            name={reader.name}
-            serialId={reader.serialId}
-            onDelete={(userId: string) => {
-              deleteMutation.mutate({ bookId: selectedBookId, userId });
-            }}
-          />
-        ))}
+          )}
+        </Box>
+        <Box className={styles.booksArea}>
+          {book.readers.map((reader) => (
+            <DataSectionCard
+              key={reader._id}
+              id={reader._id}
+              name={reader.name}
+              serialId={reader.serialId}
+              onDelete={(userId: string) => {
+                deleteMutation.mutate({ bookId: selectedBookId, userId });
+              }}
+            />
+          ))}
+        </Box>
       </Box>
     </Box>
   );

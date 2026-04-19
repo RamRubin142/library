@@ -37,4 +37,9 @@
   padding: 20px;
   width: 50%;
   padding: 2vmin;
+  overflow: auto;
+  direction: ltr;
+}
+.content {
+  direction: rtl;
 }

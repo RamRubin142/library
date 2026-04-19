@@ -16,10 +16,14 @@ import type { RootState } from "@redux/store";
 import { TitleComponent } from "@components/TitleComponent/TitleComponent";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useThemeContext } from "theme/ThemeContextProvider";
+import { ThemeButton } from "@components/themeButton/themeButton";
 export const TitleBar = () => {
   const { mode, toggleColorMode } = useThemeContext();
   const currentUserId = useSelector(
     (state: RootState) => state.loggedUser.loggedUserId,
+  );
+  const currentTheme = useSelector(
+    (state: RootState) => state.colorMode.colorMode,
   );
   const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
   const { data: user } = useQuery<UserInterface>({
@@ -62,11 +66,25 @@ export const TitleBar = () => {
 
   return (
     <Box className={styles.outerBox}>
-      <Box className={styles.toolbar} sx={{backgroundColor : "background.default", border : "0.5vmin solid divider", color : "text"}}>
-        <TitleComponent size={"10vmin"} color={mode === "light" ? "black" : "white"} />
-        <button onClick={toggleColorMode}>
-          ev
-        </button>
+      <Box
+        className={styles.toolbar}
+        sx={{
+          backgroundColor: "background.default",
+          border: "0.5vmin solid divider",
+          color: "text",
+        }}
+      >
+        <Box sx={{display : "flex"}}>
+          <TitleComponent
+            size={"10vmin"}
+            color={currentTheme == "light" ? "black" : "white"}
+          />
+          <ThemeButton 
+            mode={mode as "light" | "dark"}
+            toggle={toggleColorMode}
+          />
+        </Box>
+
         <Box className={styles.rightContainer}>
           <Box className={styles.userSection}>
             <Box className={styles.userRow}>
@@ -111,7 +129,7 @@ export const TitleBar = () => {
                   height: "100%",
                   maxWidth: "75vmin",
                   maxHeight: "30vmin",
-                  backgroundColor: "beige",
+                  backgroundColor: "background.default",
                   border: "0.5vmin dashed brown",
                   borderRadius: "0",
                 },

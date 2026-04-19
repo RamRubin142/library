@@ -21,22 +21,26 @@ export const App = () => {
   };
   const { theme } = useThemeContext();
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className={styles.font}>
-        <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path="/home" element={<MainPage />}>
-              <Route path="users" element={<UserControl />} />
-              <Route path="books" element={<BookControl />} />
-              <Route path="authors" element={<AuthorControl />} />
-              <Route index element={<Navigate to="users" />} />
-            </Route>
-          </Route>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<Navigate to="/home" />} />
-        </Routes>
-      </div>
-    </ThemeProvider>
+
+
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <div className={styles.font}>
+            <Routes>
+              <Route element={<PrivateRoutes />}>
+                <Route path="/home" element={<MainPage />}>
+                  <Route path="users" element={<UserControl />} />
+                  <Route path="books" element={<BookControl />} />
+                  <Route path="authors" element={<AuthorControl />} />
+                  <Route index element={<Navigate to="users" />} />
+                </Route>
+              </Route>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </Routes>
+          </div>
+        </ThemeProvider>
+
+
   );
 };

@@ -79,128 +79,128 @@ export const OneUserControl = () => {
   const queryClient = useQueryClient();
 
   if (!user || !selectedUserId || Array.isArray(user)) {
-    return (
-      <Box
-        sx={{ height: "80vh", padding: "20px", width: "50%" }}
-      ></Box>
-    );
+    return <Box sx={{ height: "80vh", padding: "20px", width: "50%" }}></Box>;
   }
 
   return (
     <Box className={styles.dataSection}>
-      <Box className={styles.topBar}>
-        <Box>
-          {user.books.length > 0 ? (
-            <Box className={styles.topBarText}>
-              הספרים ש
-              <Box className={styles.title}>
-                <b>{user.name}</b>
+      <Box className={styles.content}>
+        <Box className={styles.topBar}>
+          <Box>
+            {user.books.length > 0 ? (
+              <Box className={styles.topBarText}>
+                הספרים ש
+                <Box className={styles.title}>
+                  <b>{user.name}</b>
+                </Box>
+                קרא:
               </Box>
-              קרא:
-            </Box>
+            ) : (
+              <Box className={styles.topBarText}>
+                ל
+                <Box className={styles.title}>
+                  <b>{user.name}</b>
+                </Box>
+                אין ספרים שהוא קרא
+              </Box>
+            )}
+          </Box>
+          {selectedUserIsLogged ? (
+            <>
+              <button
+                className={styles.addButton}
+                onClick={handleAddBookButton}
+              >
+                הוסף ספר
+              </button>
+              <Dialog
+                open={addBookPopupIsOpen}
+                sx={{
+                  "& .MuiDialog-container": {
+                    "& .MuiPaper-root": {
+                      width: "100%",
+                      height: "100%",
+                      maxWidth: "75vmin",
+                      maxHeight: "45vmin",
+                      backgroundColor: "background.default",
+                      border: "0.5vmin dashed brown",
+                      borderRadius: "0",
+                    },
+                  },
+                }}
+              >
+                <Box className={styles.dialog}>
+                  {books &&
+                  books.filter((book) => !listOfBookIds?.includes(book?._id))
+                    ?.length > 0 ? (
+                    <Box
+                      sx={{
+                        bgcolor: "background.default",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <Box className={styles.dialogTitle}>
+                        בחר ספר
+                      </Box>
+                      <Box className={styles.listComponent}>
+                        {books
+                          ?.filter((book) => !listOfBookIds?.includes(book._id))
+                          .map((book) => (
+                            <Box
+                              className={styles.addBookComponent}
+                              onClick={() => handleAddBook(book._id)}
+                            >
+                              {book.name}
+                            </Box>
+                          ))}
+                      </Box>
+                    </Box>
+                  ) : (
+                    <>
+                      <DialogTitle className={styles.dialogTitle}>
+                        אין בספריה ספרים שעוד לא קראת
+                      </DialogTitle>
+                      <img
+                        className={styles.patrick}
+                        src="https://pbs.twimg.com/media/E-DYbZwX0AEXLhU.jpg"
+                      />
+                    </>
+                  )}
+
+                  <button
+                    className={styles.closeButton}
+                    onClick={() => setAddBookPopupIsOpen(false)}
+                  >
+                    סגור
+                  </button>
+                </Box>
+              </Dialog>
+            </>
           ) : (
-            <Box className={styles.topBarText}>
-              ל
-              <Box className={styles.title}>
-                <b>{user.name}</b>
-              </Box>
-              אין ספרים שהוא קרא
-            </Box>
+            <Box></Box>
           )}
         </Box>
-        {selectedUserIsLogged ? (
-          <>
-            <button className={styles.addButton} onClick={handleAddBookButton}>
-              הוסף ספר
-            </button>
-            <Dialog
-              open={addBookPopupIsOpen}
-              aria-labelledby="customized-dialog-title"
-              sx={{
-                "& .MuiDialog-container": {
-                  "& .MuiPaper-root": {
-                    width: "100%",
-                    height: "100%",
-                    maxWidth: "75vmin",
-                    maxHeight: "45vmin",
-                    backgroundColor: "beige",
-                    border: "0.5vmin dashed brown",
-                    borderRadius: "0",
-                  },
-                },
+        <Box className={styles.booksArea}>
+          {user.books.map((book) => (
+            <DataSectionCard
+              userIsLogged={loggedUser == user._id}
+              key={book._id}
+              id={book._id}
+              serialId={book.serialId}
+              name={book.name}
+              author={book.author.name}
+              onDelete={(bookId: string) => {
+                deleteMutation.mutate({ userId: selectedUserId, bookId });
               }}
-            >
-              <Box className={styles.dialog}>
-                {books &&
-                books.filter((book) => !listOfBookIds?.includes(book?._id))
-                  ?.length > 0 ? (
-                  <Box
-                    sx={{
-                      bgcolor: "beige",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <DialogTitle className={styles.dialogTitle}>
-                      בחר ספר
-                    </DialogTitle>
-                    <Box className={styles.listComponent}>
-                      {books
-                        ?.filter((book) => !listOfBookIds?.includes(book._id))
-                        .map((book) => (
-                          <Box
-                            className={styles.addBookComponent}
-                            onClick={() => handleAddBook(book._id)}
-                          >
-                            {book.name}
-                          </Box>
-                        ))}
-                    </Box>
-                  </Box>
-                ) : (
-                  <>
-                    <DialogTitle className={styles.dialogTitle}>
-                      אין בספריה ספרים שעוד לא קראת
-                    </DialogTitle>
-                    <img
-                      className={styles.patrick}
-                      src="https://pbs.twimg.com/media/E-DYbZwX0AEXLhU.jpg"
-                    />
-                  </>
-                )}
-
-                <button
-                  className={styles.closeButton}
-                  onClick={() => setAddBookPopupIsOpen(false)}
-                >
-                  סגור
-                </button>
-              </Box>
-            </Dialog>
-          </>
-        ) : (
-          <Box></Box>
-        )}
-      </Box>
-      <Box className={styles.booksArea}>
-        {user.books.map((book) => (
-          <DataSectionCard
-            userIsLogged={loggedUser == user._id}
-            key={book._id}
-            id={book._id}
-            serialId={book.serialId}
-            name={book.name}
-            author={book.author.name}
-            onDelete={(bookId: string) => {
-              deleteMutation.mutate({ userId: selectedUserId, bookId });
-            }}
-            onFavoriteChange={(bookId: string) => {
-              favoriteMutation.mutate({ userId: selectedUserId, bookId });
-            }}
-            userId={selectedUserId}
-            isFavorite={book._id == user.favorite}
-          />
-        ))}
+              onFavoriteChange={(bookId: string) => {
+                favoriteMutation.mutate({ userId: selectedUserId, bookId });
+              }}
+              userId={selectedUserId}
+              isFavorite={book._id == user.favorite}
+            />
+          ))}
+        </Box>
       </Box>
     </Box>
   );

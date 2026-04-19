@@ -19,43 +19,48 @@ export const OneAuthorControl = () => {
   if (!author || !selectedAuthorId || Array.isArray(author)) {
     return (
       <Box
-        sx={{  height: "80vh", padding: "2vmin", width: "40%", backgroundColor : "background.default" }}
+        sx={{
+          height: "80vh",
+          padding: "2vmin",
+          width: "40%",
+          backgroundColor: "background.default",
+        }}
       ></Box>
     );
   } else {
     return (
-      <Box
-        className={styles.dataSection}
-      >
-        <Box className={styles.topBar}>
-          <Box>
-            {author.books.length > 0 ? (
-              <Box className={styles.topBarText}>
-                הספרים של
-                <Box className={styles.title}>
-                  <b>{author.name}</b>
+      <Box className={styles.dataSection}>
+        <Box className={styles.content}>
+          <Box className={styles.topBar}>
+            <Box>
+              {author.books.length > 0 ? (
+                <Box className={styles.topBarText}>
+                  הספרים של
+                  <Box className={styles.title}>
+                    <b>{author.name}</b>
+                  </Box>
                 </Box>
-              </Box>
-            ) : (
-              <Box className={styles.topBarText}>
-                ל
-                <Box className={styles.title}>
-                  <b>{author.name}</b>
+              ) : (
+                <Box className={styles.topBarText}>
+                  ל
+                  <Box className={styles.title}>
+                    <b>{author.name}</b>
+                  </Box>
+                  אין ספרים
                 </Box>
-                אין ספרים
-              </Box>
-            )}
+              )}
+            </Box>
           </Box>
-        </Box>
-        <Box className={styles.booksArea}>
-          {author.books.map((book) => (
-            <DataSectionCard
-              key={book._id}
-              id={book.serialId}
-              name={book.name}
-              serialId={book.serialId}
-            />
-          ))}
+          <Box className={styles.booksArea}>
+            {author.books.map((book) => (
+              <DataSectionCard
+                key={book._id}
+                id={book.serialId}
+                name={book.name}
+                serialId={book.serialId}
+              />
+            ))}
+          </Box>
         </Box>
       </Box>
     );

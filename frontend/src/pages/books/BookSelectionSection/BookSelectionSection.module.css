@@ -1,7 +1,12 @@
 .selectionSection {
-    border:  0.5vmin solid black;
-    height: 80v;
-    padding: 3vmin !important;
-    width: 50%;
-    overflow: auto;
+  border: 0.5vmin solid black;
+  height: 80v;
+  padding: 3vmin !important;
+  width: 50%;
+  overflow: auto;
+  direction: ltr;
+}
+
+.content {
+  direction: rtl;
 }

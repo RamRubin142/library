@@ -67,30 +67,30 @@ export const ManyBooksControl = () => {
   };
 
   return (
-    <Box
-      className={styles.selectionSection}
-    >
-      {books.map((book) => (
-        <SelectionSectionCard
-          isSelected={selectedBookId == book._id}
-          isCurrentlyEdited={editedBookId == book._id}
-          currentlyEditedText={editedBookText}
-          onEditButtonChange={editButtonClicked}
-          onEditTextChange={editTextChanged}
-          key={book._id}
-          id={book._id}
-          serialId={book.serialId}
-          name={book.name}
-          author={book.author.name}
-          onDelete={(id: string) => {
-            deleteMutation.mutate({ bookId: id });
-          }}
-          onUpdate={(bookId: string, newName: string) => {
-            editMutation.mutate({ bookId, newName });
-          }}
-          onSelect={(id: string) => dispatch(selectBook(id))}
-        />
-      ))}
+    <Box className={styles.selectionSection}>
+      <Box className={styles.content}>
+        {books.map((book) => (
+          <SelectionSectionCard
+            isSelected={selectedBookId == book._id}
+            isCurrentlyEdited={editedBookId == book._id}
+            currentlyEditedText={editedBookText}
+            onEditButtonChange={editButtonClicked}
+            onEditTextChange={editTextChanged}
+            key={book._id}
+            id={book._id}
+            serialId={book.serialId}
+            name={book.name}
+            author={book.author.name}
+            onDelete={(id: string) => {
+              deleteMutation.mutate({ bookId: id });
+            }}
+            onUpdate={(bookId: string, newName: string) => {
+              editMutation.mutate({ bookId, newName });
+            }}
+            onSelect={(id: string) => dispatch(selectBook(id))}
+          />
+        ))}
+      </Box>
     </Box>
   );
 };
