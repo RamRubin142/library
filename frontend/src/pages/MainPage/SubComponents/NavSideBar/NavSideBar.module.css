@@ -1,8 +1,8 @@
 .buttonStyle {
 
   border-radius: 0 !important;
-  width: 30vmin !important;
-  height: 8vmin !important;
+  width: 35vmin !important;
+  height: 12vmin !important;
   font-size: 3vmin !important;
   min-width: unset !important;
   min-height: unset !important;
@@ -13,8 +13,8 @@
 .selectedButtonStyle {
 
   border-radius: 0 !important;
-  width: 30vmin !important;
-  height: 8vmin !important;
+  width: 35vmin !important;
+  height: 12vmin !important;
   font-size: 3vmin !important;
   min-width: unset !important;
   min-height: unset !important;

@@ -1,4 +1,12 @@
-import { Box, Dialog, DialogTitle } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import styles from "./UserDataSection.module.css";
 import { useSelector } from "react-redux";
 import type { RootState } from "@redux/store";
@@ -15,6 +23,7 @@ import {
 import { getBooks } from "@api/books.api";
 import { DataSectionCard } from "@components/DataSectionCard/DataSectionCard";
 export const OneUserControl = () => {
+  const [selectedBook, selectBook] = useState("");
   const loggedUser = useSelector(
     (state: RootState) => state.loggedUser.loggedUserId,
   );
@@ -122,7 +131,7 @@ export const OneUserControl = () => {
                       height: "100%",
                       maxWidth: "75vmin",
                       maxHeight: "45vmin",
-                      backgroundColor: "background.default",
+                      backgroundColor: "background.paper",
                       border: "0.5vmin dashed brown",
                       borderRadius: "0",
                     },
@@ -135,26 +144,77 @@ export const OneUserControl = () => {
                     ?.length > 0 ? (
                     <Box
                       sx={{
-                        bgcolor: "background.default",
                         display: "flex",
                         flexDirection: "column",
                       }}
                     >
-                      <Box className={styles.dialogTitle}>
-                        בחר ספר
-                      </Box>
-                      <Box className={styles.listComponent}>
-                        {books
-                          ?.filter((book) => !listOfBookIds?.includes(book._id))
-                          .map((book) => (
-                            <Box
-                              className={styles.addBookComponent}
-                              onClick={() => handleAddBook(book._id)}
-                            >
-                              {book.name}
-                            </Box>
-                          ))}
-                      </Box>
+                      <Box className={styles.dialogTitle}>בחר ספר</Box>
+                      <FormControl
+                        sx={{
+                          "& .MuiInputBase-root": {
+                            fontSize: "3vmin",
+                            height: "10vmin",
+                            marginTop: "2vmin",
+                          },
+
+                          "& .MuiSelect-select": {
+                            padding: "1vmin",
+                            display: "flex",
+                            alignItems: "center",
+                          },
+
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            border: "0.3vmin solid brown",
+                          },
+
+                          "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                            {
+                              borderColor: "black",
+                            },
+
+                          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                            {
+                              borderColor: "blue",
+                            },
+
+                          "& .MuiSelect-icon": {
+                            fontSize: "5vmin",
+                            right: "3vmin",
+                          },
+                          "& .MuiInputLabel-root": {
+                            fontSize: "3vmin",
+                            transform: "translate(1.5vmin, 1.5vmin) scale(1)",
+                          },
+
+                          "& .MuiInputLabel-shrink": {
+                            transform: "translate(1.5vmin, -1vmin) scale(0.8)",
+                          },
+                        }}
+                      >
+                        <InputLabel id="demo-simple-select-label">
+                          ספר
+                        </InputLabel>
+                        <Select
+                          value={selectedBook}
+                          label="ספר"
+                          onChange={(event) => {
+                            selectBook(event.target.value);
+                          }}
+                        >
+                          {books
+                            ?.filter(
+                              (book) => !listOfBookIds?.includes(book._id),
+                            )
+                            .map((book) => (
+                              <MenuItem
+                                className={styles.addBookComponent}
+                                onClick={() => handleAddBook(book._id)}
+                              >
+                                {book.name}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
                     </Box>
                   ) : (
                     <>

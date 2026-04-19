@@ -36,7 +36,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           },
           background: {
             default: colors.teal[800],
-            paper: colors.brown[400],
+            paper:  colors.teal[800],
           },
           action: {
             selected: colors.brown[700],
