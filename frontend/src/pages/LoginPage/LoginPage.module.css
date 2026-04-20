@@ -17,13 +17,14 @@
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  min-height: 96vh;
+  min-height: 100vh;
 }
 
 .formControl {
   width: 60vmin !important;
   margin-top: 7vmin !important ;
   font-size: 5vmin !important;
+ 
 }
 .loginButton {
   background: linear-gradient(145deg, #28a745, #1e7e34) !important;

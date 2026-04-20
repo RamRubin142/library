@@ -1,5 +1,5 @@
 .font {
-   font-family: "Fredoka", sans-serif !important;
+  font-family: "Fredoka", sans-serif !important;
 }
 
 html,
@@ -9,21 +9,22 @@ body {
   margin: 0;
 }
 ::-webkit-scrollbar {
-  width: 1vmin;
+  width: 2vmin;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(120, 85, 85);
+  background: rgb(111, 103, 103);
   border-radius: 0;
+  width: 100% !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3d2f2f;
-  border-radius: 0;
+  background: #bdb0b0;
+  border-radius: 1vmin;
+  border: 0.6vmin solid rgb(111, 103, 103);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: black;
+  background: rgb(217, 200, 200);
 }
-
 

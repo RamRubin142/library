@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: default;
 }
 
 .switch {
@@ -9,14 +10,15 @@
   display: inline-block;
   width: 12vmin;
   height: 6.5vmin;
-  cursor: pointer;
+  z-index: 9999;
 }
 
 .switch input {
+  position: absolute;
+  inset: 0;
   opacity: 0;
-  width: 0;
-  height: 0;
-  cursor: pointer; 
+  z-index: 2;
+  cursor: pointer !important;
 }
 
 /* SLIDER */
@@ -27,11 +29,12 @@
   background: #2196f3;
   transition: 0.4s;
   overflow: hidden;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .switch input:checked + .slider {
   background: #0b0f1a;
+  cursor: pointer !important;
 }
 
 /* SUN / MOON */
@@ -49,6 +52,7 @@
 .switch input:checked + .slider .sunMoon {
   transform: translateX(5.5vmin);
   background: white;
+  cursor: pointer !important;
 }
 
 /* MOON DOTS */
@@ -62,6 +66,7 @@
 
 .switch input:checked + .slider .moonDot {
   opacity: 1;
+  cursor: pointer !important;
 }
 
 .moonDot:nth-child(1) {
@@ -95,6 +100,7 @@
 .switch input:checked + .slider .stars {
   opacity: 1;
   transform: translateY(0);
+  cursor: pointer !important;
 }
 
 /* STAR SHAPE */
@@ -145,11 +151,4 @@
   100% {
     transform: scale(1);
   }
-}
-
-.sunMoon,
-.stars,
-.star,
-.moonDot {
-  pointer-events: none;
 }

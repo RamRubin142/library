@@ -92,3 +92,7 @@
   align-items: center;
   width: 5vmin;
 }
+
+.tooltip {
+  font-size: 2vmin !important;
+}

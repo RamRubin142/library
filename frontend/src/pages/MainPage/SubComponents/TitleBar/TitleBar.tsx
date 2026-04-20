@@ -1,8 +1,8 @@
-import { Box, Tooltip } from "@mui/material";
+import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import type { BookInterface } from "@models/books/BookInterface";
 import type { UserInterface } from "@models/users/UserInterface";
 import { getUserById } from "@api/users.api";
@@ -43,24 +43,8 @@ export const TitleBar = () => {
     navigate("/login");
   };
 
-  function isupperOverflowActive(event: any) {
-    if (!event) return false;
-    return (
-      event.offsetHeight < event.scrollHeight ||
-      event.offsetWidth < event.scrollWidth
-    );
-  }
+ 
 
-  useEffect(() => {
-    if (isupperOverflowActive(upperTextRef?.current)) {
-      setupperOverflowActive(true);
-      return;
-    }
-
-    setupperOverflowActive(false);
-  }, [isupperOverflowActive]);
-
-  const [upperOverflowActive, setupperOverflowActive] = useState(false);
 
   const upperTextRef = useRef<HTMLDivElement | null>(null);
 
@@ -74,12 +58,12 @@ export const TitleBar = () => {
           color: "text",
         }}
       >
-        <Box sx={{display : "flex"}}>
+        <Box sx={{ display: "flex" }}>
           <TitleComponent
             size={"10vmin"}
             color={currentTheme == "light" ? "black" : "white"}
           />
-          <ThemeButton 
+          <ThemeButton
             mode={mode as "light" | "dark"}
             toggle={toggleColorMode}
           />
@@ -89,14 +73,9 @@ export const TitleBar = () => {
           <Box className={styles.userSection}>
             <Box className={styles.userRow}>
               שלום
-              <Tooltip
-                title={user?.name}
-                disableHoverListener={!upperOverflowActive}
-              >
-                <Box ref={upperTextRef} className={styles.title}>
-                  {user?.name}
-                </Box>
-              </Tooltip>
+              <Box ref={upperTextRef} className={styles.title}>
+                {user?.name}
+              </Box>
               !
             </Box>
 

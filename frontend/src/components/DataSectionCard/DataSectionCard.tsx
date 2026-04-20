@@ -70,14 +70,14 @@ export const DataSectionCard = (props: DataSectionCardProps) => {
   return (
     <Box className={styles.bookContainer} sx={{bgcolor : "action.disabled"}}>
       <Box className={styles.dataSection}>
-        <Tooltip title={props.name} disableHoverListener={!upperOverflowActive}>
+        <Tooltip  title={<h1 style={{ fontSize: "2vmin" }}>{props.name}</h1>} disableHoverListener={!upperOverflowActive}>
           <Box className={styles.text} ref={upperTextRef}>
             {`מזהה : ${props.serialId}    שם : ${props.name}`}
           </Box>
         </Tooltip>
         {props.author ? (
           <Tooltip
-            title={props.author}
+             title={<h1 style={{ fontSize: "2vmin" }}>{props.author}</h1>}
             disableHoverListener={!lowerOverflowActive}
           >
             <Box className={styles.text} ref={lowerTextRef}>{`סופר : ${props.author}`}</Box>

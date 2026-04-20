@@ -104,7 +104,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
             />
           ) : (
             <Tooltip
-              title={props.name}
+              title={<h1 style={{ fontSize: "2vmin" }}>{props.name}</h1>}
               disableHoverListener={!upperOverflowActive}
             >
               <Box
@@ -117,7 +117,7 @@ export const SelectionSectionCard = (props: SelectionSectionCardProps) => {
 
         {props.author && !props.isCurrentlyEdited ? (
           <Tooltip
-            title={props.author}
+             title={<h1 style={{ fontSize: "2vmin" }}>{props.author}</h1>}
             disableHoverListener={!lowerOverflowActive}
           >
             <Box

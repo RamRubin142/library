@@ -200,6 +200,15 @@ export const OneUserControl = () => {
                           onChange={(event) => {
                             selectBook(event.target.value);
                           }}
+                          MenuProps={{
+                            PaperProps: {
+                              sx: {
+                                maxHeight: "30vmin",
+                                overflowY: "auto",
+                                direction: "rtl",
+                              },
+                            },
+                          }}
                         >
                           {books
                             ?.filter(

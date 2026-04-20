@@ -38,6 +38,7 @@ export const LoginPage = () => {
         className={styles.formControl}
         sx={{
           "& .MuiInputBase-root": {
+            color : "black",
             fontSize: "3vmin",
             height: "10vmin",
             marginTop: "2vmin",
@@ -47,10 +48,11 @@ export const LoginPage = () => {
             padding: "1vmin",
             display: "flex",
             alignItems: "center",
+            color : "black",
           },
 
           "& .MuiOutlinedInput-notchedOutline": {
-            border: "0.3vmin solid brown",
+            border: "0.3vmin solid black",
           },
 
           "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
@@ -59,7 +61,7 @@ export const LoginPage = () => {
 
           "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
             {
-              borderColor: "blue",
+              borderColor: "black",
             },
 
           "& .MuiSelect-icon": {
@@ -69,6 +71,7 @@ export const LoginPage = () => {
           "& .MuiInputLabel-root": {
             fontSize: "3vmin",
             transform: "translate(1.5vmin, 1.5vmin) scale(1)",
+            color : "black"
           },
 
           "& .MuiInputLabel-shrink": {
@@ -96,18 +99,20 @@ export const LoginPage = () => {
           onChange={(event) => {
             selectUser(event.target.value);
           }}
+          
           MenuProps={{
             PaperProps: {
               sx: {
-                maxHeight: "30vmin", // 👈 fixed height
-                overflowY: "auto", // 👈 enable scroll
+                maxHeight: "30vmin", 
+                overflowY: "auto", 
+                direction: "rtl"
               },
             },
           }}
         >
           
             {users.map((user) => (
-              <MenuItem key={user._id} value={user._id} className={styles.text}>
+              <MenuItem key={user._id} value={user._id} className={styles.text} sx={{direction:"ltr"}}>
                 {user.name}
               </MenuItem>
             ))}
